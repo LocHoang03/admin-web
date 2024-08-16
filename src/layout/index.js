@@ -89,7 +89,7 @@ function LayoutAdmin({ children }) {
   const [file, setFile] = useState();
   const [imagePreview, setImagePreview] = useState();
 
-  const newSocket = io('http://localhost:4000/admin');
+  const newSocket = io(`${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin`);
 
   useEffect(() => {
     setSocket(newSocket);
