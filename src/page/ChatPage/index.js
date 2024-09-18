@@ -65,6 +65,7 @@ function ChatPage() {
   const {
     listChat,
     socket,
+    socketUser,
     setMessage,
     message,
     isLoading,
@@ -114,6 +115,7 @@ function ChatPage() {
       dataLength = dataLength + 1;
       data = {
         input: input[roomId],
+        roomId: roomId,
         userId: userInfo.userId,
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
@@ -134,7 +136,7 @@ function ChatPage() {
         [roomId]: '',
       }));
       scrollToBottom();
-      socket.emit('chatCustomer', data);
+      socketUser.emit('chatCustomer', data);
       await fetch(API_UPDATE_MESSAGE + '/' + roomId, {
         method: 'PATCH',
         body: dataForm,
@@ -145,6 +147,7 @@ function ChatPage() {
       dataForm.append('file', file[roomId]);
       let newDataAdd = {
         input: '',
+        roomId: roomId,
         userId: userInfo.userId,
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
@@ -197,7 +200,7 @@ function ChatPage() {
         file: json.data.messages[json.data.messages.length - 1].file,
         time: json.data.messages[json.data.messages.length - 1].time,
       };
-      socket.emit('chatCustomer', data);
+      socketUser.emit('chatCustomer', data);
     }
     socket.off('chatCustomer');
     setFile((prev) => ({ ...prev, [roomId]: undefined }));
@@ -339,8 +342,10 @@ function ChatPage() {
         'Content-Type': 'application/json',
       },
     });
-    const json = result.json();
+    const json = await result.json();
     if (json.success) {
+      console.log(data);
+      socket.emit('joinRoom', data.roomId);
       socket.emit('deleteRoom', data);
     }
   };

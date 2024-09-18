@@ -31,6 +31,9 @@ function getItem(label, key, icon, children) {
   };
 }
 
+const newSocket = io(`${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin`);
+const newSocketUser = io(`${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/user`);
+
 function LayoutAdmin({ children }) {
   const [select, setSelect] = useState(
     window.location.pathname === '/' ||
@@ -83,17 +86,21 @@ function LayoutAdmin({ children }) {
   const [chooseChat, setChooseChat] = useState();
   const [message, setMessage] = useState({});
   const [socket, setSocket] = useState();
+  const [socketUser, setSocketUser] = useState();
   const [input, setInput] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [visible, setVisible] = useState(true);
   const [file, setFile] = useState();
   const [imagePreview, setImagePreview] = useState();
 
-  const newSocket = io(`${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin`);
-
   useEffect(() => {
     setSocket(newSocket);
-    newSocket.on('chatCustomer', (newMessage) => {
+    setSocketUser(newSocketUser);
+    newSocket.on('test', (newMessage) => {
+      console.log('vào đây ko', newMessage);
+    });
+    newSocket.on('receiveChatCustomer', (newMessage) => {
+      console.log('vào đây ko', newMessage);
       setMessage((prev) => ({
         ...prev,
         [newMessage.roomId]: [
@@ -104,6 +111,7 @@ function LayoutAdmin({ children }) {
     });
 
     newSocket.on('delete-room', (data) => {
+      console.log(data);
       if (userInfo.userId !== data.userId) {
         setListChat((prev) =>
           prev.filter((item) => item.roomId !== data.roomId),
@@ -127,9 +135,8 @@ function LayoutAdmin({ children }) {
     });
 
     return () => {
-      newSocket.off('chatCustomer');
+      newSocket.off('receiveChatCustomer');
       newSocket.off('room');
-      // newSocket.disconnect();
     };
   }, [message, listChat, userInfo]);
 
@@ -242,6 +249,7 @@ function LayoutAdmin({ children }) {
           value={{
             select: select,
             socket,
+            socketUser,
             message,
             setMessage,
             listChat,
