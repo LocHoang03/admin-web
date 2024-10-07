@@ -27,6 +27,15 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
     }
   }, [asset]);
 
+  useEffect(() => {
+    return () => {
+      const iframe = document.querySelector('iframe');
+      if (iframe) {
+        iframe.src = '';
+      }
+    };
+  }, []);
+
   const handleOk = () => {
     setIsModalDetail(false);
   };

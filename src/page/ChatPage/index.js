@@ -111,7 +111,7 @@ function ChatPage() {
     setImagePreview((prev) => ({ ...prev, [roomId]: null }));
     let data = null,
       dataLength = message && message[roomId] ? message[roomId].length : 0;
-    if (input[roomId] && !filePreview) {
+    if (input[roomId]) {
       dataLength = dataLength + 1;
       data = {
         input: input[roomId],
