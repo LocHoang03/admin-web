@@ -90,14 +90,16 @@ function AssetsPage(props) {
 
   const searchParams = new URLSearchParams(location.search);
 
+  //  lấy param search
   const look = searchParams.get('look');
   const pageCurrent = searchParams.get('page');
   const textSearch = searchParams.get('textSearch');
   const textCountry = searchParams.get('textCountry');
 
+  //  thong báo
   const openNotification = (placement, message) => {
     notification.error({
-      message: `Notification Error`,
+      message: `Thông báo lỗi`,
       description: message,
       placement,
     });
@@ -161,6 +163,7 @@ function AssetsPage(props) {
     setIsModal(true);
   };
 
+  //  taobj table hien thi du lieu
   useEffect(() => {
     const tableData = {
       title: {
@@ -186,12 +189,14 @@ function AssetsPage(props) {
     pageCurrent,
   ]);
 
+  //  gọi dữ liệu từ api action của redux đưa dữ liệu vào slice
   useEffect(() => {
     setIsLoading(true);
     let pageNum = getPage();
     setTextLook('');
     setValueCountries('All');
 
+    // trang khi reload mới
     if (!look) {
       if (props.type === 'series') {
         Promise.all([dispatch(fetchAllSeries(pageNum))]);
@@ -205,6 +210,7 @@ function AssetsPage(props) {
         Promise.all([dispatch(fetchAllSeriesTrash(pageNum))]);
       }
     } else {
+      // trang khi reload mới có params search
       switch (props.type) {
         case 'series':
           Promise.all([
@@ -342,7 +348,7 @@ function AssetsPage(props) {
     if (e.target.files[0] !== undefined) {
       setDataFile(e.target.files[0]);
       setTextModal(
-        `Are you sure you want to add all the data ${props.type} from the csv file?`,
+        `Bạn có chắc chắn muốn thêm tất cả dữ liệu từ tệp csv không?`,
       );
       setTypeModal('file');
       setIsModalOpen(true);
@@ -562,9 +568,7 @@ function AssetsPage(props) {
     return (
       <DivAssets>
         <DivError>
-          <TextError>
-            The server is having problems, please try again later!!!
-          </TextError>
+          <TextError>Server đang gặp sự cố, vui lòng thử lại sau!!!</TextError>
         </DivError>
       </DivAssets>
     );
@@ -591,13 +595,14 @@ function AssetsPage(props) {
           </FormModalContext.Provider>
           <DivAction>
             <Button type="primary" onClick={showModal}>
-              Add
+              Thêm
             </Button>
           </DivAction>
           {props.type === 'movies' && (
             <>
               <ButtonImport onClick={handleImport}>
-                <ImportOutlined /> Import many data movies
+                <ImportOutlined />
+                Nhập nhiều dữ liệu phim
               </ButtonImport>
               <Modal
                 open={isModalUpload}
@@ -610,10 +615,10 @@ function AssetsPage(props) {
                       data={dataExport}
                       filename="instruction-file.csv"
                       className="link-download-csv">
-                      Instruction file
+                      Tập tin hướng dẫn
                     </CSVLink>
                     <Text htmlFor="file" onClick={handleOpenFile}>
-                      Import file{' '}
+                      Nhập tập tin{' '}
                       <input
                         id="file"
                         name="file"
@@ -625,9 +630,9 @@ function AssetsPage(props) {
                   </>
                 )}>
                 <p>
-                  If you're not sure how to set up a csv file, please click the
-                  download file for instructions. If not, click import file to
-                  add data.
+                  Nếu bạn không chắc chắn về cách thiết lập tệp csv, vui lòng
+                  nhấp vào tải tập tin để được hướng dẫn. Nếu không, hãy nhấp
+                  vào nhập tệp vào thêm dữ liệu.
                 </p>
               </Modal>
             </>
@@ -651,7 +656,7 @@ function AssetsPage(props) {
             <Select
               showSearch
               value={defaultValue}
-              placeholder="Select a series"
+              placeholder="Chọn 1 phim bộ"
               optionFilterProp="children"
               onChange={onChange}
               filterOption={filterOption}
@@ -665,12 +670,12 @@ function AssetsPage(props) {
       <Modal
         title={
           props.type === 'movies' || props.type === 'series'
-            ? 'Add data ' + props.type
+            ? 'Thêm dữ liệu '
             : typeModal === 'delete'
-            ? 'Delete data'
+            ? 'Xóa dữ liệu'
             : typeModal === 'recover'
-            ? 'Recover data'
-            : 'Destroy data'
+            ? 'Khôi phục dữ liệu'
+            : 'Loại bỏ dữ liệu'
         }
         open={isModalOpen}
         onOk={handleOk}

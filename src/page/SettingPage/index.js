@@ -153,7 +153,7 @@ function SettingPage(props) {
         ) : (
           <DivError>
             <TextError>
-              The server is having problems, please try again later!!!
+              Server đang gặp sự cố, vui lòng thử lại sau!!!
             </TextError>
           </DivError>
         )}
@@ -197,7 +197,7 @@ function SettingPage(props) {
       </DivAddData>
 
       <Modal
-        title={'Delete data'}
+        title={'Xóa dữ liệu'}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}>

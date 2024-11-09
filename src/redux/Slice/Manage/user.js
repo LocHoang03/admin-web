@@ -68,6 +68,7 @@ export const UserSlice = createSlice({
     });
     builder.addCase(updateUser.fulfilled, (state, action) => {
       state.loading = false;
+      console.log(action.payload.data);
       for (let i = 0; i < state.data.length; i++) {
         if (state.data[i]._id === action.payload.userId) {
           state.data[i].firstName = action.payload.data.firstName;
@@ -75,6 +76,7 @@ export const UserSlice = createSlice({
           state.data[i].email = action.payload.data.email;
           state.data[i].phoneNumber = action.payload.data.phoneNumber;
           state.data[i].sex = action.payload.data.sex;
+          state.data[i].role = action.payload.data.typeAccount;
           break;
         }
       }

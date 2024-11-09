@@ -15,7 +15,7 @@ function FormResolveQuestion(props) {
   const success = () => {
     messageApi.open({
       type: 'success',
-      content: 'Reply sent successfully.',
+      content: 'Đã gửi trả lời thành công.',
       duration: 1.5,
     });
   };
@@ -55,9 +55,9 @@ function FormResolveQuestion(props) {
         onFinishFailed={onFinishFailed}
         autoComplete="off">
         <ItemForm
-          label="Explanation"
+          label="Giải thích phản hồi"
           name="explanation"
-          message="Please input explanation!"
+          message="Vui lòng nhập lời giải thích phản hồi!"
           input={<Input />}
         />
 
@@ -66,7 +66,7 @@ function FormResolveQuestion(props) {
             span: 24,
           }}
           className="add-film-button">
-          <Button htmlType="submit">{'Send'}</Button>
+          <Button htmlType="submit">{'Gửi'}</Button>
         </Form.Item>
       </Form>
     </>

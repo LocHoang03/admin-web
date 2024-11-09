@@ -29,7 +29,7 @@ function ModalDetailUser({ setIsModalDetail, isModalDetail, asset, type }) {
   if (!asset || !data) {
     return (
       <ModalDetail
-        title={type === 'user' ? 'Detail User' : 'Detail Subscriber'}
+        title={type === 'user' ? 'Chi tiết nhân viên' : 'Chi tiết khách hàng'}
         open={isModalDetail}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -46,7 +46,7 @@ function ModalDetailUser({ setIsModalDetail, isModalDetail, asset, type }) {
 
   return (
     <ModalDetail
-      title={type === 'user' ? 'Detail User' : 'Detail Subscriber'}
+      title={type === 'user' ? 'Chi tiết nhân viên' : 'Chi tiết khách hàng'}
       open={isModalDetail}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -58,15 +58,23 @@ function ModalDetailUser({ setIsModalDetail, isModalDetail, asset, type }) {
       className="modal-detail-user">
       <DivInfoDetail>
         <InfoDetail>
-          <InfoItem>First name: {data.firstName}</InfoItem>
-          <InfoItem>Last name: {data.lastName}</InfoItem>
+          <InfoItem>
+            Họ và tên: {data.lastName} {data.firstName}
+          </InfoItem>
           <InfoItem>Email: {data.email}</InfoItem>
-          <InfoItem>Phone number: {data.phoneNumber}</InfoItem>
-          <InfoItem>Sex: {data.sex}</InfoItem>
-          {type === 'user' && <InfoItem>Role: {data.role}</InfoItem>}
+          <InfoItem>Số điện thoại: {data.phoneNumber}</InfoItem>
+          <InfoItem>Giới tính: {data.sex}</InfoItem>
+          {type === 'user' && (
+            <InfoItem>
+              Loại tài khoản:{' '}
+              {data.role === 'adminFilm'
+                ? 'Nhân viên quản lý phim'
+                : 'Nhân viên chăm sóc khách hàng'}
+            </InfoItem>
+          )}
         </InfoDetail>
         <DivImage>
-          <h2>Image User</h2>
+          <h2>Hình ảnh nhân viên</h2>
           <Image
             width={260}
             height={260}

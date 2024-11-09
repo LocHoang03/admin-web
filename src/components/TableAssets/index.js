@@ -23,7 +23,7 @@ function TableAssets(props) {
     if (props.type === 'trash-film-for-series') {
       props.setSeriesId(record.seriesId);
     }
-    props.setTextModal('Are you sure you want to recover this data?');
+    props.setTextModal('Bạn có chắc chắn muốn khôi phục dữ liệu này không?');
     props.setIsModalOpen(true);
   };
 
@@ -33,7 +33,7 @@ function TableAssets(props) {
     if (props.type === 'film-for-series') {
       props.setSeriesId(record.seriesId);
     }
-    props.setTextModal('Are you sure you want to delete this data?');
+    props.setTextModal('Bạn có chắc chắn muốn xóa dữ liệu này?');
     props.setIsModalOpen(true);
   };
   const handleDestroy = (record, type) => {
@@ -42,7 +42,7 @@ function TableAssets(props) {
     if (props.type === 'trash-film-for-series') {
       props.setSeriesId(record.seriesId);
     }
-    props.setTextModal('Are you sure you want to destroy this data?');
+    props.setTextModal('Bạn có chắc chắn muốn loại bỏ dữ liệu này không?');
     props.setIsModalOpen(true);
   };
 
@@ -50,7 +50,7 @@ function TableAssets(props) {
     setDataTable(undefined);
     let dataSource = [
       {
-        title: 'Action',
+        title: 'Hành động',
         key: 'action',
         onCell: () => ({
           style: { TextAlign: 'center' },
@@ -58,7 +58,7 @@ function TableAssets(props) {
         render: (_, record) => (
           <Space size="large">
             <ButtonAction onClick={() => handleDetail(record)}>
-              <TagAction color="processing">Detail</TagAction>
+              <TagAction color="processing">Chi tiết</TagAction>
             </ButtonAction>
             {props.type !== 'payment' && (
               <>
@@ -72,7 +72,7 @@ function TableAssets(props) {
                         props.setDataRecord(record);
                         props.setIsModal(true);
                       }}>
-                      Update
+                      Cập nhật
                     </TagAction>
                   </ButtonAction>
                 ) : (
@@ -80,7 +80,7 @@ function TableAssets(props) {
                     <TagAction
                       color="warning"
                       onClick={() => handleRecover(record, 'recover')}>
-                      Recover
+                      Khôi phục
                     </TagAction>
                   </ButtonAction>
                 )}
@@ -91,12 +91,12 @@ function TableAssets(props) {
                   props.type !== 'trash-film-for-series' ? (
                     <ButtonAction
                       onClick={() => handleDelete(record, 'delete')}>
-                      <TagAction color="error">Delete</TagAction>
+                      <TagAction color="error">Xóa</TagAction>
                     </ButtonAction>
                   ) : (
                     <ButtonAction
                       onClick={() => handleDestroy(record, 'destroy')}>
-                      <TagAction color="error">Destroy</TagAction>
+                      <TagAction color="error">Loại bỏ</TagAction>
                     </ButtonAction>
                   ))}
               </>

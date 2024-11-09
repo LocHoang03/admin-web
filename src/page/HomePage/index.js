@@ -160,7 +160,7 @@ function HomePage(props) {
         <ColSummary span={6}>
           <div className="margin-left-0">
             <DivInfo>
-              <h4>EARNINGS (MONTHLY)</h4>
+              <h4>THU NHẬP (HÀNG THÁNG)</h4>
               <label>${dataSummary.totalPurMonth}</label>
             </DivInfo>
             <DivIcon>
@@ -171,7 +171,7 @@ function HomePage(props) {
         <ColSummary span={6}>
           <div>
             <DivInfo>
-              <h4>EARNINGS (ANNUAL)</h4>
+              <h4>THU NHẬP (HÀNG NĂM)</h4>
               <label>${dataSummary.totalPur}</label>
             </DivInfo>
             <DivIcon>
@@ -182,7 +182,7 @@ function HomePage(props) {
         <ColSummary span={6} user={true}>
           <div>
             <DivInfo>
-              <h4>SUBSCRIBER (MONTHLY)</h4>
+              <h4>NGƯỜI ĐĂNG KÝ (HÀNG THÁNG)</h4>
               <label>{dataSummary.countResMonth}</label>
             </DivInfo>
             <DivIcon>
@@ -193,7 +193,7 @@ function HomePage(props) {
         <ColSummary span={6} user={true}>
           <div className="margin-right-0">
             <DivInfo>
-              <h4>SUBSCRIBER (ANNUAL)</h4>
+              <h4>NGƯỜI ĐĂNG KÝ (HÀNG NĂM)</h4>
               <label>{dataSummary.countRes}</label>
             </DivInfo>
             <DivIcon>
@@ -207,7 +207,7 @@ function HomePage(props) {
           <DivTotal>
             <div>
               <DivSelectAndTitle>
-                <h3>Number of subscribers</h3>
+                <h3>Số lượng người đăng ký</h3>
                 <DivSelectAndExport>
                   <Select
                     options={optionsSelect}
@@ -221,7 +221,8 @@ function HomePage(props) {
                     <CSVLink
                       data={dataExportRegister}
                       filename="Quantity-Register.csv">
-                      <ExportOutlined /> Export data
+                      <ExportOutlined />
+                      Xuất dữ liệu
                     </CSVLink>
                   </DivExport>
                 </DivSelectAndExport>
@@ -241,7 +242,7 @@ function HomePage(props) {
           <DivTotal>
             <div>
               <DivSelectAndTitle>
-                <h3>Total purchase amount</h3>
+                <h3>Tổng số tiền thu nhập</h3>
                 <DivSelectAndExport>
                   <Select
                     options={optionsSelect}
@@ -255,7 +256,8 @@ function HomePage(props) {
                     <CSVLink
                       data={dataExportPurchase}
                       filename="Total-purchases.csv">
-                      <ExportOutlined /> Export data
+                      <ExportOutlined />
+                      Xuất dữ liệu
                     </CSVLink>
                   </DivExport>
                 </DivSelectAndExport>
@@ -277,7 +279,7 @@ function HomePage(props) {
           <RowSummaryToday>
             <ColSummaryToday>
               <DivSummaryToday>
-                <Title>Total amount for each package for the year</Title>
+                <Title>Tổng số tiền từng gói trong năm</Title>
                 <DataToday>
                   <div>
                     <Doughnut
@@ -296,7 +298,7 @@ function HomePage(props) {
       <RowTableUser>
         <ColTableUser span={12}>
           <DivTable>
-            <h3>List of most recently registered users</h3>
+            <h3>Danh sách người dùng đăng ký gần đây nhất</h3>
             <Table
               columns={columns}
               dataSource={subscriber}
@@ -306,7 +308,7 @@ function HomePage(props) {
         </ColTableUser>
         <ColTableUser span={12}>
           <DivTable right={'right'}>
-            <h3>List of recent user orders</h3>
+            <h3>Danh sách người đăng ký gói phim gần đây</h3>
             <Table columns={columns2} dataSource={data} pagination={false} />
           </DivTable>
         </ColTableUser>

@@ -31,7 +31,7 @@ function ProfilePage() {
 
   const openNotification = (placement, message) => {
     notification.error({
-      message: `Notification Error`,
+      message: `Thông báo lỗi`,
       description: message,
       placement,
     });
@@ -55,23 +55,19 @@ function ProfilePage() {
   const [form] = Form.useForm();
   const [options, setOptions] = useState([
     {
-      value: 'male',
-      label: 'Male',
+      value: 'Nam',
+      label: 'Nam',
     },
     {
-      value: 'female',
-      label: 'Female',
-    },
-    {
-      value: 'other',
-      label: 'Other',
+      value: 'Nữ',
+      label: 'Nữ',
     },
   ]);
 
   const [items, setItems] = useState([
     {
       key: 'update',
-      label: 'Update Profile',
+      label: 'Cập nhật hồ sơ',
       children: (
         <FormUpdateProfile
           form={form}
@@ -84,7 +80,7 @@ function ProfilePage() {
     },
     {
       key: 'change',
-      label: 'Change Password',
+      label: 'Thay đổi mật khẩu',
       children: (
         <FormUpdateProfile
           form={form}
@@ -117,7 +113,7 @@ function ProfilePage() {
       info.file.type !== 'image/jpg' &&
       info.file.type !== 'image/png'
     ) {
-      openNotification('top', 'Invalid image type!!');
+      openNotification('top', 'Loại hình ảnh không hợp lệ!!');
       return;
     }
 
@@ -160,7 +156,7 @@ function ProfilePage() {
         setLoading(false);
       }
     } else {
-      openNotification('topRight', 'Default images cannot be deleted!!');
+      openNotification('topRight', 'Không thể xóa hình ảnh mặc định!!');
       return;
     }
   };
@@ -202,13 +198,13 @@ function ProfilePage() {
                     beforeUpload={(file) => {
                       return false;
                     }}>
-                    <Button icon={<CameraOutlined />}>Upload new photo</Button>
+                    <Button icon={<CameraOutlined />}>Tải ảnh mới lên</Button>
                   </Upload>
                 </DivUpload>
                 <DivInfo>
                   <Text>Email: {user.email}</Text>
-                  <Text>Phone Number: {user.phoneNumber}</Text>
-                  <Text>Gender: {user.sex}</Text>
+                  <Text>Số điện thoại: {user.phoneNumber}</Text>
+                  <Text>Giới tính: {user.sex}</Text>
                 </DivInfo>
               </DivContentLeft>
             </ColLeft>

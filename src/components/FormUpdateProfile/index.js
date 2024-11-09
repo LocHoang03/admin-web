@@ -30,7 +30,7 @@ function FormUpdateProfile(props) {
         if (json.success) {
           updateUserInfo(json.token);
           setLoading(false);
-          props.success('Update profile successfully.');
+          props.success('Cập nhật hồ sơ thành công.');
         } else {
           setLoading(false);
           props.error(json.message);
@@ -50,7 +50,7 @@ function FormUpdateProfile(props) {
       if (json.success) {
         updateUserInfo(json.token);
         setLoading(false);
-        props.success('Change password successfully.');
+        props.success('Thay đổi mật khẩu thành công.');
       } else {
         setLoading(false);
         props.error(json.message);
@@ -88,31 +88,32 @@ function FormUpdateProfile(props) {
             layout="vertical"
             autoComplete="off">
             <InputItem
-              label="First Name"
-              name="firstName"
-              message="Please input your first name!"
+              label="Họ"
+              name="lastName"
+              message="Vui lòng nhập họ của bạn!"
               input={<Input />}
             />
             <InputItem
-              label="Last Name"
-              name="lastName"
-              message="Please input your last name!"
+              label="Tên"
+              name="firstName"
+              message="Vui lòng nhập tên của bạn!"
               input={<Input />}
             />
+
             <InputItem
               label="E-mail"
               name="email"
-              message="Please input your email!"
+              message="Vui lòng nhập email của bạn!"
               input={<Input disabled />}
             />
             <InputItem
-              label="Phone Number"
+              label="Số điện thoại"
               name="phoneNumber"
-              message="Please input your phone number!"
+              message="Vui lòng nhập số điện thoại của bạn!"
               input={<Input />}
             />
             <InputItem
-              label="Gender"
+              label="Giới tính"
               name="sex"
               input={
                 <Select
@@ -130,7 +131,7 @@ function FormUpdateProfile(props) {
                 span: 24,
               }}>
               <Button type="primary" htmlType="submit">
-                Update
+                Cập nhật
               </Button>
             </Form.Item>
           </Form>
@@ -151,21 +152,21 @@ function FormUpdateProfile(props) {
             layout="vertical"
             autoComplete="off">
             <InputItem
-              label="Current Password"
+              label="Mật khẩu hiện tại"
               name="currentPassword"
-              message="Please input your current password!"
+              message="Vui lòng nhập mật khẩu hiện tại!"
               input={<Input.Password />}
             />
             <InputItem
-              label="New Password"
+              label="Mật khẩu mới"
               name="newPassword"
-              message="Please input your new password!"
+              message="Vui lòng nhập mật khẩu mới!"
               input={<Input.Password />}
             />
             <InputItem
-              label="Confirm New Password"
+              label="Xác nhận mật khẩu mới"
               name="confirmNewPassword"
-              message="Please input your confirm new password!"
+              message="Vui lòng nhập mật khẩu xác nhận!"
               input={<Input.Password />}
             />
             <Form.Item
@@ -173,7 +174,7 @@ function FormUpdateProfile(props) {
                 span: 24,
               }}>
               <Button type="primary" htmlType="submit">
-                Update
+                Cập nhật
               </Button>
             </Form.Item>
           </Form>

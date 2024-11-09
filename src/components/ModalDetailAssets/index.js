@@ -46,7 +46,7 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
   if (!asset || !data) {
     return (
       <ModalDetail
-        title={type === 'category' ? 'Detail Category' : 'Detail Asset'}
+        title={'Chi tiết'}
         open={isModalDetail}
         onOk={handleOk}
         onCancel={handleCancel}>
@@ -58,7 +58,7 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
   if (type === 'movies' && !data && !data.videoUrl && !data.videoUrl.url) {
     return (
       <ModalDetail
-        title={type === 'category' ? 'Detail Category' : 'Detail Asset'}
+        title={'Chi tiết'}
         open={isModalDetail}
         onOk={handleOk}
         onCancel={handleCancel}>
@@ -72,34 +72,32 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
       className="detail-assets"
       title={
         type === 'category'
-          ? 'Detail Category'
+          ? 'Chi tiết thể loại'
           : type !== 'film-for-series' &&
             type !== 'trash-film-for-series' &&
             type !== 'payment'
-          ? 'Detail Asset'
+          ? 'Chi tiết phim'
           : type !== 'payment'
-          ? 'Detail Asset Series ' + data.seriesId.title
-          : 'Detail Package'
+          ? 'Chi tiết tập phim ' + data.seriesId.title
+          : 'Chi tiết gói'
       }
       open={isModalDetail}
       onOk={handleOk}
       onCancel={handleCancel}>
       <DivTitle>
         {type === 'category' ? (
-          <TitleDetail>Name category : {data.name}</TitleDetail>
+          <TitleDetail>Tên thể loại : {data.name}</TitleDetail>
         ) : type !== 'film-for-series' &&
           type !== 'trash-film-for-series' &&
           type !== 'payment' &&
           type !== 'subscription-price' ? (
-          <TitleDetail>Name film : {data.title}</TitleDetail>
+          <TitleDetail>Tên phim : {data.title}</TitleDetail>
         ) : type !== 'payment' && type !== 'subscription-price' ? (
-          <TitleDetail>Episode {data.filmSerialNumber}</TitleDetail>
+          <TitleDetail>Tập {data.filmSerialNumber}</TitleDetail>
         ) : type === 'payment' ? (
-          <TitleDetail>
-            Information about customers purchasing packages
-          </TitleDetail>
+          <TitleDetail>Thông tin khách hàng mua gói</TitleDetail>
         ) : (
-          <TitleDetail>Information packages</TitleDetail>
+          <TitleDetail>Thông tin gói</TitleDetail>
         )}
       </DivTitle>
 
@@ -109,7 +107,7 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
           <>
             {(type === 'movies' || type === 'series') && (
               <DivVideo>
-                <h2>Trailer </h2>
+                <h2>Đoạn giới thiệu </h2>
                 <VideoDetail>
                   <iframe
                     width="100%"
@@ -141,57 +139,65 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
             )}
             <DivInfoDetail>
               <InfoDetail>
-                <h2>Information Detail </h2>
+                <h2>Thông tin chi tiết </h2>
                 {type !== 'payment' && type !== 'subscription-price' && (
-                  <InfoItem>Description: {data.description}</InfoItem>
+                  <InfoItem>Mô tả: {data.description}</InfoItem>
                 )}
                 {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Director: {data.director}</InfoItem>
+                  <InfoItem>Đạo diễn: {data.director}</InfoItem>
                 )}
                 {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Cast: {data.cast}</InfoItem>
+                  <InfoItem>Dàn diễn viên: {data.cast}</InfoItem>
                 )}
                 {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Duration: {data.duration} minute</InfoItem>
+                  <InfoItem>Thời lượng: {data.duration} minute</InfoItem>
                 )}
                 {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Country: {data.country.join(', ')}</InfoItem>
+                  <InfoItem>Quốc gia: {data.country.join(', ')}</InfoItem>
                 )}
 
                 {type !== 'payment' && type !== 'subscription-price' && (
-                  <InfoItem>Rating: {data.rating}/5</InfoItem>
+                  <InfoItem>Đánh giá: {data.rating}/5</InfoItem>
                 )}
                 {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Release Date: {data.releaseDate}</InfoItem>
+                  <InfoItem>Năm sản xuất: {data.releaseDate}</InfoItem>
                 )}
 
                 {type === 'payment' && (
                   <>
                     <InfoItem>
-                      Username: {data.userId.firstName} {data.userId.lastName}
+                      Họ và tên: {data.userId.firstName} {data.userId.lastName}
                     </InfoItem>
                     <InfoItem>Email: {data.userId.email}</InfoItem>
-                    <InfoItem>Phone number: {data.userId.phoneNumber}</InfoItem>
-                    <InfoItem>Package type in use: {data.typePack}</InfoItem>
-                    <InfoItem>Monthly price: ${data.monthlyPrice}</InfoItem>
+                    <InfoItem>
+                      Số điện thoại: {data.userId.phoneNumber}
+                    </InfoItem>
+                    <InfoItem>
+                      Loại gói đăng ký đang dùng: {data.typePack}
+                    </InfoItem>
+                    <InfoItem>Giá hàng tháng: ${data.monthlyPrice}</InfoItem>
                   </>
                 )}
 
                 {type !== 'subscription-price' && (
                   <InfoItem>
-                    Created At: {dayjs(data.createAt).format('DD-MM-YYYY')}
+                    Ngày tạo: {dayjs(data.createAt).format('DD-MM-YYYY')}
                   </InfoItem>
                 )}
                 {type === 'payment' && (
                   <InfoItem>
-                    Expiration date:{' '}
+                    Ngày hết hạn:{' '}
                     {dayjs(data.expirationDate).format('DD-MM-YYYY')}
                   </InfoItem>
                 )}
               </InfoDetail>
               {type !== 'subscription-price' && (
                 <DivImage>
-                  <h2>{type !== 'payment' ? 'Image Film' : 'Image user'}</h2>
+                  <h2>
+                    {type !== 'payment'
+                      ? 'Hình ảnh phim'
+                      : 'Hình ảnh người dùng'}
+                  </h2>
                   <Image
                     width={250}
                     height={350}
@@ -208,17 +214,21 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
             {type === 'subscription-price' && (
               <DivInfo>
                 <ListInfo>
-                  <ItemInfo>Type package: {data.typePack}</ItemInfo>
-                  <ItemInfo>Monthly price: ${data.monthlyPrice}</ItemInfo>
-                  <ItemInfo>Quality picture: {data.qualityPicture}</ItemInfo>
-                  <ItemInfo>Resolution: {data.resolution}</ItemInfo>
-                  <ItemInfo>DeviceSupport: {data.deviceSupport}</ItemInfo>
-                  <ItemInfo>Quantity watch: {data.quantityWatch}</ItemInfo>
+                  <ItemInfo>Loại gói: {data.typePack}</ItemInfo>
+                  <ItemInfo>Giá hàng tháng: ${data.monthlyPrice}</ItemInfo>
                   <ItemInfo>
-                    Quantity download: {data.quantityDownload}
+                    Chất lượng hình ảnh: {data.qualityPicture}
+                  </ItemInfo>
+                  <ItemInfo>Độ phân giải: {data.resolution}</ItemInfo>
+                  <ItemInfo>Thiết bị hỗ trợ: {data.deviceSupport}</ItemInfo>
+                  <ItemInfo>
+                    Số lượng thiết bị được xem: {data.quantityWatch}
                   </ItemInfo>
                   <ItemInfo>
-                    Created at: {dayjs(data.createAt).format('DD-MM-YYYY')}
+                    Số lượng thiết bị được tải về: {data.quantityDownload}
+                  </ItemInfo>
+                  <ItemInfo>
+                    Ngày tạo gói: {dayjs(data.createAt).format('DD-MM-YYYY')}
                   </ItemInfo>
                 </ListInfo>
               </DivInfo>

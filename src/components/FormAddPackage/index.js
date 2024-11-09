@@ -25,7 +25,7 @@ function FormAddPackage(props) {
   const { type, dataRecord } = useContext(FormModalContext);
   const openNotification = (placement, message) => {
     notification.error({
-      message: `Notification Error`,
+      message: `Thông báo lỗi`,
       description: message,
       placement,
     });
@@ -106,56 +106,56 @@ function FormAddPackage(props) {
           {type !== 'payment' ? (
             <>
               <ItemForm
-                label="Type package"
+                label="Loại gói"
                 name="typePack"
-                message="Please input your type package!"
+                message="Vui lòng nhập tên loại gói!"
                 input={<Input />}
               />
 
               <ItemForm
-                label="Quality picture"
+                label="Chất lượng hình ảnh"
                 name="qualityPicture"
-                message="Please input quality picture!"
+                message="Vui lòng nhập chất lượng hình ảnh!"
                 input={<Input />}
               />
 
               <ItemForm
-                label="Resolution"
+                label="Độ phân giải"
                 name="resolution"
-                message="Please input resolution!"
+                message="Vui lòng nhập độ phân giải!"
                 input={<Input />}
               />
 
               <ItemForm
-                label="Device support"
+                label="Thiết bị hỗ trợ"
                 name="deviceSupport"
-                message="Please input device support!"
+                message="Vui lòng nhập tên các thiết bị hỗ trợ!"
                 input={<Input />}
               />
               <ItemForm
-                label="quantity watch"
+                label="Số lượng thiết bị cho phép"
                 name="quantityWatch"
-                message="Please input quantity watch!"
+                message="Vui lòng nhập số lượng thiết bị cho phép!"
                 input={<InputNumber />}
               />
 
               <ItemForm
-                label="Quantity download"
+                label="Số lượng tải xuống"
                 name="quantityDownload"
-                message="Please input quantity download!"
+                message="Vui lòng nhập số lượng thiết bị có thể tải xuống!"
                 input={<InputNumber />}
               />
             </>
           ) : (
             <>
               <ItemForm
-                label={'Email subscriber'}
+                label={'Email người đăng ký'}
                 name="emailSubscriber"
-                message={`Please select email subscriber!`}
+                message={`Vui lòng nhập email người đăng ký!`}
                 input={
                   <Select
                     showSearch
-                    placeholder="Select a email subscriber"
+                    placeholder="Chọn 1 email người đăng ký"
                     optionFilterProp="children"
                     filterOption={filterOption}
                     options={props.options2}
@@ -163,13 +163,13 @@ function FormAddPackage(props) {
                 }
               />
               <ItemForm
-                label={'Type Package'}
+                label={'Loại gói đăng ký'}
                 name="typePackage"
-                message={`Please select type package!`}
+                message={`Vui lòng chọn loại gói đăng ký!`}
                 input={
                   <Select
                     showSearch
-                    placeholder="Select a package"
+                    placeholder="Chọn 1 gói đăng ký"
                     optionFilterProp="children"
                     filterOption={filterOption}
                     options={props.options}
@@ -184,7 +184,7 @@ function FormAddPackage(props) {
             }}
             className="add-film-button">
             <Button htmlType="submit">
-              {dataRecord === undefined ? 'Add Package' : 'Update Package'}
+              {dataRecord === undefined ? 'Thêm' : 'Cập nhật'}
             </Button>
           </Form.Item>
         </Form>

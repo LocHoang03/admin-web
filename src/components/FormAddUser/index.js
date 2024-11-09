@@ -11,16 +11,22 @@ import { API_POST_CREATE_USER, API_POST_UPDATE_USER } from '../../configs/apis';
 function FormAddUser(props) {
   const [options, setOptions] = useState([
     {
-      value: 'male',
-      label: 'Male',
+      value: 'Nam',
+      label: 'Nam',
     },
     {
-      value: 'female',
-      label: 'Female',
+      value: 'Nữ',
+      label: 'Nữ',
+    },
+  ]);
+  const [optionsAccount, setOptionsAccount] = useState([
+    {
+      label: 'Nhân viên chăm sóc khách hàng',
+      value: 'adminCustom',
     },
     {
-      value: 'other',
-      label: 'Other',
+      label: 'Nhân viên quản lý phim',
+      value: 'adminFilm',
     },
   ]);
   const [messageApi, contextHolder] = message.useMessage();
@@ -50,6 +56,7 @@ function FormAddUser(props) {
       email: values.email,
       phoneNumber: values.phoneNumber,
       sex: values.sex,
+      typeAccount: values.typeAccount,
     };
 
     try {
@@ -67,7 +74,7 @@ function FormAddUser(props) {
         );
         const data = await response.json();
         if (data.success) {
-          success('Updated user successfully.');
+          success('Cập nhật thành công.');
           dispatch(updateUser({ userId: dataRecord._id, data: dataBody }));
           props.handleCancel();
         } else {
@@ -85,7 +92,7 @@ function FormAddUser(props) {
         });
         const data = await response.json();
         if (data.success) {
-          success('Created user successfully.');
+          success('Tạo mới tài khoản nhân viên thành công.');
           dispatch(createUser(data.user));
           props.handleCancel();
         } else {
@@ -117,33 +124,33 @@ function FormAddUser(props) {
           autoComplete="off">
           <>
             <ItemForm
-              label={'First name'}
-              name="firstName"
-              message={`Please enter your first name!`}
+              label={'Họ'}
+              name="lastName"
+              message={`Vui lòng nhập họ!`}
               input={<Input />}
             />
             <ItemForm
-              label={'Last name'}
-              name="lastName"
-              message={`Please enter your last name!`}
+              label={'Tên'}
+              name="firstName"
+              message={`Vui lòng nhập tên!`}
               input={<Input />}
             />
             <ItemForm
               label={'Email'}
               name="email"
-              message={`Please enter your email!`}
+              message={`Vui lòng nhập email!`}
               input={<Input />}
             />
             <ItemForm
-              label={'Phone number'}
+              label={'Số điện thoại'}
               name="phoneNumber"
-              message={`Please enter your phone number!`}
+              message={`Vui lòng nhập số điện thoại!`}
               input={<Input />}
             />
             <ItemForm
-              label={'Gender'}
+              label={'Giới tính'}
               name="sex"
-              message={`Please enter your gender!`}
+              message={`Chọn giới tính!`}
               input={
                 <Select
                   style={{
@@ -155,6 +162,21 @@ function FormAddUser(props) {
                 />
               }
             />
+            <ItemForm
+              label={'Loại tài khoản'}
+              name="typeAccount"
+              message={`Chọn loại tài khoản!`}
+              input={
+                <Select
+                  style={{
+                    width: '100%',
+                    textAlign: 'left',
+                  }}
+                  allowClear
+                  options={optionsAccount}
+                />
+              }
+            />
           </>
           <Form.Item
             wrapperCol={{
@@ -162,7 +184,7 @@ function FormAddUser(props) {
             }}
             className="add-film-button">
             <Button htmlType="submit">
-              {dataRecord === undefined ? 'Add User' : 'Update User'}
+              {dataRecord === undefined ? 'Thêm mới' : 'Cập nhật'}
             </Button>
           </Form.Item>
         </Form>

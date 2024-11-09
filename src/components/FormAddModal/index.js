@@ -38,7 +38,7 @@ function FormAddModal(props) {
     useContext(FormModalContext);
   const openNotification = (placement, message) => {
     notification.error({
-      message: `Notification Error`,
+      message: `Thông báo lỗi`,
       description: message,
       placement,
     });
@@ -90,12 +90,12 @@ function FormAddModal(props) {
         values.imageUrl.file.type !== 'image/jpg' &&
         values.imageUrl.file.type !== 'image/png'
       ) {
-        openNotification('top', 'Invalid image type!!');
+        openNotification('top', 'Loại hình ảnh không hợp lệ!!');
         return;
       }
 
       if (values.videoUrl && values.videoUrl.file.type !== 'video/mp4') {
-        openNotification('top', 'Invalid video type!!');
+        openNotification('top', 'Loại video không hợp lệ!!');
         return;
       }
     }
@@ -273,12 +273,12 @@ function FormAddModal(props) {
                 <Checkbox
                   checked={props.checkImageFilm}
                   onChange={(e) => onChangeCheckbox(e, 'image')}>
-                  Image film
+                  Hình ảnh phim
                 </Checkbox>
                 <Checkbox
                   checked={props.checkVideoTrailer}
                   onChange={(e) => onChangeCheckbox(e, 'video-trailer')}>
-                  Video trailer
+                  Đoạn giới thiệu phim
                 </Checkbox>
               </>
             )}
@@ -286,7 +286,7 @@ function FormAddModal(props) {
               <Checkbox
                 checked={props.checkVideoFilm}
                 onChange={(e) => onChangeCheckbox(e, 'video')}>
-                Video film
+                Video phim
               </Checkbox>
             )}
           </DivCheckUpdate>
@@ -306,9 +306,13 @@ function FormAddModal(props) {
           autoComplete="off">
           {type !== 'film-for-series' && (
             <ItemForm
-              label={'Name ' + (type.charAt(0).toUpperCase() + type.slice(1))}
+              label={
+                type === 'movies' || type === 'series'
+                  ? 'Tên phim'
+                  : type === 'Tên thể loại'
+              }
               name={(type === 'category' && 'name') || 'title'}
-              message={`Please input your name ${type}!`}
+              message={`Vui lòng nhập nội dung!`}
               input={<Input />}
             />
           )}
@@ -316,20 +320,18 @@ function FormAddModal(props) {
           {(type === 'series' || type === 'movies') && (
             <>
               <ItemForm
-                label="Description"
+                label="Mô tả phim"
                 name="description"
-                message="Please input your description!"
+                message="Vui lòng nhập mô tả của bạn!"
                 input={<Input />}
               />
 
               {dataRecord ? (
                 props.checkImageFilm && (
                   <ItemForm
-                    label={`Image ${
-                      type.charAt(0).toUpperCase() + type.slice(1)
-                    } Url`}
+                    label={`Hình ảnh phim`}
                     name="imageUrl"
-                    message="Please input your image url!"
+                    message="Vui lòng chọn hình ảnh phim!"
                     input={
                       <Upload
                         maxCount={1}
@@ -350,11 +352,9 @@ function FormAddModal(props) {
                 )
               ) : (
                 <ItemForm
-                  label={`Image ${
-                    type.charAt(0).toUpperCase() + type.slice(1)
-                  } Url`}
+                  label={`Hình ảnh phim`}
                   name="imageUrl"
-                  message="Please input your image url!"
+                  message="Vui lòng chọn hình ảnh phim!"
                   input={
                     <Upload
                       maxCount={1}
@@ -377,11 +377,9 @@ function FormAddModal(props) {
               {dataRecord ? (
                 props.checkVideoTrailer && (
                   <ItemForm
-                    label={`Video trailer ${
-                      type.charAt(0).toUpperCase() + type.slice(1)
-                    } Url`}
+                    label={`Video giới thiệu phim`}
                     name="videoTrailerUrl"
-                    message="Please input your video trailer url!"
+                    message="Vui lòng chọn video giới thiệu phim!"
                     input={
                       <Upload
                         showUploadList={true}
@@ -399,11 +397,9 @@ function FormAddModal(props) {
                 )
               ) : (
                 <ItemForm
-                  label={`Video trailer ${
-                    type.charAt(0).toUpperCase() + type.slice(1)
-                  } Url`}
+                  label={`Video giới thiệu phim`}
                   name="videoTrailerUrl"
-                  message="Please input your video trailer url!"
+                  message="Vui lòng chọn video giới thiệu phim!"
                   input={
                     <Upload
                       showUploadList={true}
@@ -426,9 +422,9 @@ function FormAddModal(props) {
             (dataRecord ? (
               props.checkVideoFilm && (
                 <ItemForm
-                  label="Video Film Url"
+                  label="Video phim"
                   name="videoUrl"
-                  message="Please input your video url!"
+                  message="Vui lòng chọn video phim!"
                   input={
                     <Upload
                       showUploadList={true}
@@ -446,9 +442,9 @@ function FormAddModal(props) {
               )
             ) : (
               <ItemForm
-                label="Video Film Url"
+                label="Video phim"
                 name="videoUrl"
-                message="Please input your video url!"
+                message="Vui lòng chọn video phim!"
                 input={
                   <Upload
                     showUploadList={true}
@@ -468,25 +464,25 @@ function FormAddModal(props) {
           {type === 'film-for-series' && (
             <>
               <ItemForm
-                label="Film serial number"
+                label="Tập phim (Số)"
                 name="filmSerialNumber"
-                message="Please input your film serial number!"
+                message="Vui lòng nhập số cho tập phim!"
                 input={<InputNumber min={1} type="number" />}
               />
               <ItemForm
-                label="Release Date"
+                label="Năm sản xuất"
                 name="releaseDate"
-                message="Please input your release date!"
+                message="Vui lòng chọn năm sản xuất phim!"
                 input={<DatePicker picker="year" />}
               />
               <ItemForm
-                label={'Film for series'}
+                label={'Thuộc tập phim'}
                 name="listSeries"
-                message={`Please select your series!`}
+                message={`Vui lòng chọn phim chứa tập phim này!`}
                 input={
                   <Select
                     showSearch
-                    placeholder="Select a series"
+                    placeholder="Chọn 1 phim bộ"
                     optionFilterProp="children"
                     onChange={onChange}
                     filterOption={filterOption}
@@ -500,31 +496,31 @@ function FormAddModal(props) {
           {(type === 'movies' || type === 'series') && (
             <>
               <ItemForm
-                label="Release Date"
+                label="Năm sản xuất"
                 name="releaseDate"
-                message="Please input your release date!"
+                message="Vui lòng chọn năm sản xuất!"
                 input={<DatePicker picker="year" />}
               />
 
               <ItemForm
-                label="Director"
+                label="Đạo diễn"
                 name="director"
-                message="Please input your director!"
+                message="Vui lòng nhập tên đạo diễn!"
                 input={<Input />}
               />
 
               <ItemForm
-                label="Cast"
+                label="Diễn viên"
                 name="cast"
-                message="Please input your cast!"
+                message="Vui lòng nhập tên các diễn viên (cách nhau dấu phẩy)!"
                 initialValue={dataRecord !== undefined ? dataRecord.cast : ''}
                 input={<Input />}
               />
 
               <ItemForm
-                label="Country"
+                label="Quốc gia"
                 name="country"
-                message="Please select your country!"
+                message="Vui lòng chọn quốc gia!"
                 input={
                   <Select
                     showSearch
@@ -533,7 +529,7 @@ function FormAddModal(props) {
                       props.setValueCountries(value);
                     }}
                     value={props.valueCountries}
-                    placeholder={'Select a country'}
+                    placeholder={'Chọn quốc gia'}
                     optionFilterProp="children"
                     filterOption={filterOption}
                     options={props.countriesData}
@@ -542,13 +538,9 @@ function FormAddModal(props) {
               />
 
               <ItemForm
-                label={
-                  type === 'movies'
-                    ? 'Film for category'
-                    : 'Series for category'
-                }
+                label={'Thể loại phim'}
                 name="listCategoryId"
-                message={`Please select your ${type} for category!`}
+                message={`Vui lòng chọn thể loại phim!`}
                 input={
                   <Select
                     mode="multiple"
@@ -556,20 +548,16 @@ function FormAddModal(props) {
                     style={{
                       width: '100%',
                     }}
-                    placeholder="Please select"
+                    placeholder="Chọn thể loại phim"
                     options={props.options}
                   />
                 }
               />
 
               <ItemForm
-                label={
-                  type === 'movies'
-                    ? 'Film for package not allows watch'
-                    : 'Series for package not allows watch'
-                }
+                label={'Gói phim không được phép truy cập (không được xem)'}
                 name="listPackageIdBand"
-                message={`Please select your ${type} for package!`}
+                message={`Vui lòng chọn gói phim!`}
                 input={
                   <Select
                     mode="multiple"
@@ -591,13 +579,7 @@ function FormAddModal(props) {
             }}
             className="add-film-button">
             <Button htmlType="submit">
-              {dataRecord !== undefined
-                ? type !== 'film-for-series'
-                  ? `Update ${type.charAt(0).toUpperCase() + type.slice(1)}`
-                  : 'Update film'
-                : type !== 'film-for-series'
-                ? `Add ${type.charAt(0).toUpperCase() + type.slice(1)}`
-                : 'Add film'}
+              {dataRecord !== undefined ? 'Thêm mới' : 'Cập nhật'}
             </Button>
           </Form.Item>
         </Form>

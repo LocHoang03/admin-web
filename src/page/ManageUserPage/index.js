@@ -90,11 +90,11 @@ function ManageUserPage(props) {
     error = bannedSubscriber.error;
     count = bannedSubscriber.count;
   }
-
+  console.log(data);
   useEffect(() => {
     const tableData = {
       title4: {
-        title: 'Email Address',
+        title: 'Địa chỉ email',
         dataIndex: 'email',
         key: 'email',
         width: userInfo.role === 'superAdmin' ? '30%' : '25%',
@@ -103,7 +103,7 @@ function ManageUserPage(props) {
         }),
       },
       title3: {
-        title: 'Gender',
+        title: 'Giới tính',
         dataIndex: 'sex',
         key: 'sex',
         width: userInfo.role === 'superAdmin' ? '20%' : '15%',
@@ -111,19 +111,19 @@ function ManageUserPage(props) {
           style: { fontWeight: '500' },
         }),
       },
-      title2: {
-        title: 'Last Name',
-        dataIndex: 'lastName',
-        key: 'lastName',
+      title: {
+        title: 'Tên',
+        dataIndex: 'firstName',
+        key: 'firstName',
         width: userInfo.role === 'superAdmin' ? '20%' : '15%',
         onCell: () => ({
           style: { fontWeight: '500' },
         }),
       },
-      title: {
-        title: 'First Name',
-        dataIndex: 'firstName',
-        key: 'firstName',
+      title2: {
+        title: 'Họ',
+        dataIndex: 'lastName',
+        key: 'lastName',
         width: userInfo.role === 'superAdmin' ? '20%' : '15%',
         onCell: () => ({
           style: { fontWeight: '500' },
@@ -149,7 +149,7 @@ function ManageUserPage(props) {
         },
       });
       const data = await response.json();
-      let arr = [{ label: 'All', value: 'All' }];
+      let arr = [{ label: 'Tất cả', value: 'All' }];
       for (let i = 0; i < data.data.length; i++) {
         arr.push({ label: data.data[i].email, value: data.data[i].email });
       }
@@ -352,9 +352,7 @@ function ManageUserPage(props) {
     return (
       <DivManage>
         <DivError>
-          <TextError>
-            The server is having problems, please try again later!!!
-          </TextError>
+          <TextError>Server đang gặp sự cố, vui lòng thử lại sau!!!</TextError>
         </DivError>
       </DivManage>
     );
@@ -367,7 +365,7 @@ function ManageUserPage(props) {
           {props.type === 'user' && (
             <DivAction>
               <Button type="primary" onClick={showModal}>
-                Add User
+                Thêm mới
               </Button>
             </DivAction>
           )}
@@ -430,12 +428,12 @@ function ManageUserPage(props) {
       <Modal
         title={
           isOptions === 1
-            ? 'Delete Password'
+            ? 'Xóa'
             : isOptions === 2
-            ? 'Reset Password'
+            ? 'Đặt lại MK'
             : isOptions === 3
-            ? 'Banned Account'
-            : 'Recover Account'
+            ? 'Khóa'
+            : 'Khôi phục'
         }
         open={isModalOpen}
         onOk={handleOk}

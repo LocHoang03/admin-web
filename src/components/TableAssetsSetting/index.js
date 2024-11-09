@@ -20,7 +20,7 @@ function TableAssetsSetting(props) {
   const handleDelete = (record, type) => {
     props.setDataId(record._id);
     props.setTypeModal(type);
-    props.setTextModal('Are you sure you want to delete this data?');
+    props.setTextModal('Bạn có chắc chắn muốn xóa dữ liệu này?');
     props.setIsModalOpen(true);
   };
 
@@ -28,7 +28,7 @@ function TableAssetsSetting(props) {
     setDataTable(undefined);
     let dataSource = [
       {
-        title: 'Action',
+        title: 'Hành động',
         key: 'action',
         width: props.type === 'customer-questions' ? '10%' : '20%',
         onCell: () => ({
@@ -37,7 +37,7 @@ function TableAssetsSetting(props) {
         render: (_, record) => (
           <Space size="large">
             <ButtonAction onClick={() => handleDetail(record)}>
-              <TagAction color="processing">Detail</TagAction>
+              <TagAction color="processing">Chi tiết</TagAction>
             </ButtonAction>
             {
               <>
@@ -49,7 +49,7 @@ function TableAssetsSetting(props) {
                         props.setDataRecord(record);
                         props.setIsModal(true);
                       }}>
-                      Update
+                      Cập nhật
                     </TagAction>
                   </ButtonAction>
                 )}
@@ -61,13 +61,13 @@ function TableAssetsSetting(props) {
                         props.setDataRecord(record);
                         props.setIsModal(true);
                       }}>
-                      Resolve
+                      Giải quyết
                     </TagAction>
                   </ButtonAction>
                 )}
                 {props.type === 'common-questions' && (
                   <ButtonAction onClick={() => handleDelete(record, 'delete')}>
-                    <TagAction color="error">Delete</TagAction>
+                    <TagAction color="error">Xóa</TagAction>
                   </ButtonAction>
                 )}
               </>

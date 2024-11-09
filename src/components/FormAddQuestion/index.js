@@ -73,16 +73,16 @@ function FormAddQuestion(props) {
           onFinishFailed={onFinishFailed}
           autoComplete="off">
           <ItemForm
-            label="Title"
+            label="Tiêu đề"
             name="title"
-            message="Please input title!"
+            message="Vui lòng nhập tiêu đề!"
             input={<Input />}
           />
 
           <ItemForm
-            label="Description"
+            label="Mô tả chi tiết"
             name="description"
-            message="Please input description!"
+            message="Vui lòng nhập mô tả chi tiết!!"
             input={<Input />}
           />
 
@@ -92,7 +92,7 @@ function FormAddQuestion(props) {
             }}
             className="add-film-button">
             <Button htmlType="submit">
-              {dataRecord === undefined ? 'Add Question' : 'Update Question'}
+              {dataRecord === undefined ? 'Thêm mới' : 'Cập nhật'}
             </Button>
           </Form.Item>
         </Form>

@@ -69,7 +69,7 @@ function PaymentAndPackagePage(props) {
     const fetchDataPayment = async () => {
       const response = await fetch(API_GET_DATA_PACKAGE);
       const dataJson = await response.json();
-      let data = [{ label: 'All', value: 'all' }];
+      let data = [{ label: 'Tất cả', value: 'all' }];
       for (let i = 0; i < dataJson.data.length; i++) {
         data.push({
           label: dataJson.data[i].typePack,
@@ -222,7 +222,7 @@ function PaymentAndPackagePage(props) {
           {props.type !== 'subscription-price' && (
             <div>
               <Button type="primary" onClick={showModal}>
-                Add
+                Thêm
               </Button>
             </div>
           )}

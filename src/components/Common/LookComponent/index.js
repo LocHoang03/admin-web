@@ -12,7 +12,7 @@ function LookInfo(props) {
       <DivLook>
         {props.type === 'payment' && (
           <Input
-            placeholder={'Search by first name'}
+            placeholder={'Tìm kiếm theo tên'}
             allowClear
             value={props.firstName}
             onChange={(e) => props.setFirstName(e.target.value)}
@@ -21,14 +21,14 @@ function LookInfo(props) {
         <Input
           placeholder={
             props.type === 'category'
-              ? 'Search by category name'
+              ? 'Tìm kiếm theo tên danh mục'
               : props.type === 'movies' || props.type === 'trash-movies'
-              ? 'Search by movie name'
+              ? 'Tìm kiếm theo tên phim'
               : props.type === 'series' || props.type === 'trash-series'
-              ? 'Search by series name'
+              ? 'Tìm kiếm theo tên phim'
               : props.type === 'payment'
-              ? 'Search by last name'
-              : 'Search by  name package'
+              ? 'Tìm kiếm theo họ'
+              : 'Tìm theo tên gói'
           }
           allowClear
           value={props.textLook}
@@ -43,8 +43,8 @@ function LookInfo(props) {
             }
             placeholder={
               props.type !== 'payment' && props.type !== 'subscription-price'
-                ? 'Select a country'
-                : 'Select a package'
+                ? 'Chọn một quốc gia'
+                : 'Chọn một gói'
             }
             optionFilterProp="children"
             onChange={(value) => {
@@ -69,13 +69,13 @@ function LookInfo(props) {
       <>
         <DivLook>
           <Input
-            placeholder={'Search by first name'}
+            placeholder={'Tìm kiếm theo tên'}
             allowClear
             value={props.textFirstName}
             onChange={(e) => props.setTextFirstName(e.target.value)}
           />
           <Input
-            placeholder={'Search by last name'}
+            placeholder={'Tìm kiếm theo họ'}
             allowClear
             value={props.textLastName}
             onChange={(e) => props.setTextLastName(e.target.value)}
@@ -85,7 +85,7 @@ function LookInfo(props) {
             showSearch
             defaultValue={'All'}
             value={props.valueEmail}
-            placeholder={'Select a email'}
+            placeholder={'Chọn một email'}
             optionFilterProp="children"
             onChange={(value) => {
               props.setValueEmail(value);
@@ -96,14 +96,14 @@ function LookInfo(props) {
           <Select
             defaultValue={'All'}
             value={props.valueGender}
-            placeholder={'Select a gender'}
+            placeholder={'Chọn giới tính'}
             onChange={(value) => {
               props.setValueGender(value);
             }}
             options={[
-              { label: 'All', value: 'All' },
-              { label: 'Male', value: 'male' },
-              { label: 'Female', value: 'female' },
+              { label: 'Tất cả', value: 'All' },
+              { label: 'Nam', value: 'Nam' },
+              { label: 'Nữ', value: 'Nữ' },
             ]}
           />
           <BtnLook onClick={() => props.onChangeLook()}>Search</BtnLook>

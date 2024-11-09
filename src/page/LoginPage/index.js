@@ -24,6 +24,7 @@ function LoginPage() {
 
   const [messageApi, contextHolder] = message.useMessage();
 
+  //  thobng bao
   const success = (text) => {
     messageApi.open({
       type: 'success',
@@ -32,6 +33,7 @@ function LoginPage() {
     });
   };
 
+  //  thực hiên đăng nhập
   const onFinish = async (values) => {
     setError();
     const response = await fetch(API_LOGIN, {
@@ -47,7 +49,7 @@ function LoginPage() {
     const responseJson = await response.json();
 
     if (responseJson.success) {
-      success('Login successfully.');
+      success('Đăng nhập thành công.');
       await localStorage.setItem('tokenManager', responseJson.token);
       if (localStorage.getItem('tokenManager')) {
         setTimeout(() => {
@@ -90,16 +92,16 @@ function LoginPage() {
               <ItemFormLogin
                 label="Email"
                 name="email"
-                message="Please input your email!"
+                message="Vui lòng nhập email của bạn!"
                 input={
                   <Input onFocus={handleFocus} className="form-add-modal" />
                 }
               />
 
               <ItemFormLogin
-                label="Password"
+                label="Mật khẩu"
                 name="password"
-                message="Please input your password!"
+                message="Vui lòng nhập mật khẩu của bạn!"
                 input={
                   <Input.Password
                     onFocus={handleFocus}
@@ -113,7 +115,7 @@ function LoginPage() {
                 wrapperCol={{
                   span: 24,
                 }}>
-                <Button htmlType="submit">Sign in</Button>
+                <Button htmlType="submit">Đăng nhập</Button>
                 {error && <ErrorMessage>{error}!!</ErrorMessage>}
               </Form.Item>
             </Form>

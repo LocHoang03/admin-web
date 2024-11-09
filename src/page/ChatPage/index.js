@@ -363,7 +363,7 @@ function ChatPage() {
       <RowContainer>
         <ColContainer span={8}>
           <DivLeft>
-            <h2>Chat message</h2>
+            <h2>Tin nhắn trò chuyện</h2>
             <ListChat>
               {listChat && listChat.length > 0 ? (
                 listChat.map((item, id) => {
@@ -405,7 +405,7 @@ function ChatPage() {
                 })
               ) : (
                 <DivInfo>
-                  <h3>No Conversations</h3>
+                  <h3>Không có cuộc trò chuyện</h3>
                 </DivInfo>
               )}
             </ListChat>
@@ -424,12 +424,11 @@ function ChatPage() {
                             <DivInfoOut>
                               <div>
                                 <p style={{ textAlign: 'center' }}>
-                                  The chat session has not been received by
-                                  anyone.
+                                  Phiên trò chuyện chưa được nhận bởi bất cứ ai.
                                 </p>
                                 <ButtonInfo
                                   onClick={() => handleJoinChat(item.roomId)}>
-                                  Join chat
+                                  Tham gia trò chuyện
                                 </ButtonInfo>
                               </div>
                             </DivInfoOut>
@@ -437,10 +436,10 @@ function ChatPage() {
                           {visible[item.roomId] && (
                             <DivInfoOut>
                               <div>
-                                <p>This chat session has been ended</p>
+                                <p>Phiên trò chuyện này đã kết thúc</p>
                                 <ButtonInfo
                                   onClick={() => handleOutRoom(item.roomId)}>
-                                  Oke
+                                  Đồng ý
                                 </ButtonInfo>
                               </div>
                             </DivInfoOut>
@@ -463,12 +462,12 @@ function ChatPage() {
                             </DivRightItem>
                             <DivOutRoom>
                               <Popconfirm
-                                title="Out room chat"
-                                description="Are you sure to leave this room?"
+                                title="Rời phòng"
+                                description="Bạn có chắc chắn rời khỏi phòng này không?"
                                 onConfirm={(e) => onConfirm(e, item.roomId)}
                                 onCancel={onCancel}
-                                okText="Yes"
-                                cancelText="No">
+                                okText="Đồng ý"
+                                cancelText="Từ chối">
                                 <ButtonOutRoom>
                                   <LogoutOutlined />
                                 </ButtonOutRoom>
@@ -479,8 +478,8 @@ function ChatPage() {
                             {error && error[item.roomId] && (
                               <DivError>
                                 <p>
-                                  The file only records images in jpg/jpeg/png
-                                  format or videos in mp4 format
+                                  Tệp chỉ ghi hình ảnh ở định dạng jpg/jpeg/png
+                                  định dạng hoặc video ở định dạng mp4!!
                                 </p>
                               </DivError>
                             )}
@@ -518,7 +517,7 @@ function ChatPage() {
                                               <p>
                                                 {itemMes.status !== undefined &&
                                                 itemMes.status === false
-                                                  ? 'Sending'
+                                                  ? 'Đang gửi'
                                                   : itemMes.time}
                                               </p>
                                             </>
@@ -535,15 +534,15 @@ function ChatPage() {
                                                       src={itemMes.file.url}
                                                       type="video/mp4"
                                                     />
-                                                    Your browser does not
-                                                    support video.
+                                                    Trình duyệt của bạn không
+                                                    video hỗ trợ.
                                                   </video>
                                                 </DivFile>
                                                 <p>
                                                   {itemMes.status !==
                                                     undefined &&
                                                   itemMes.status === false
-                                                    ? 'Sending'
+                                                    ? 'Đang gửi'
                                                     : itemMes.time}
                                                 </p>
                                               </>
@@ -594,8 +593,8 @@ function ChatPage() {
                                                     src={itemMes.file.url}
                                                     type="video/mp4"
                                                   />
-                                                  Your browser does not support
-                                                  video.
+                                                  Trình duyệt của bạn không hỗ
+                                                  trợ video.
                                                 </video>
                                               </DivFile>
                                             </>
@@ -611,7 +610,7 @@ function ChatPage() {
                               <input
                                 ref={inputRef}
                                 name="search"
-                                placeholder="Enter chat message"
+                                placeholder="Nhập tin nhắn trò chuyện"
                                 value={input[item.roomId] || ''}
                                 onChange={(e) => {
                                   setInput((prev) => ({
@@ -697,7 +696,8 @@ function ChatPage() {
                                             src={imagePreview[item.roomId].url}
                                             type="video/mp4"
                                           />
-                                          Your browser does not support video.
+                                          Trình duyệt của bạn không hỗ trợ
+                                          video.
                                         </video>
                                       </>
                                     )}
@@ -714,7 +714,7 @@ function ChatPage() {
                 })
               ) : (
                 <DivInfo>
-                  <h3>There are no conversations available at the moment.</h3>
+                  <h3>Không có cuộc trò chuyện có sẵn vào lúc này.</h3>
                 </DivInfo>
               )}
             </ListMessage>

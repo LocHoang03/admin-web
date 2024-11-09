@@ -28,8 +28,8 @@ function ModalDetailQuestions({
       <ModalDetail
         title={
           type === 'common-questions'
-            ? 'Detail Common Questions'
-            : 'Detail Custom Questions'
+            ? 'Chi tiết câu hỏi thường gặp'
+            : 'Chi tiết phản ánh/góp ý từ khách hàng'
         }
         open={isModalDetail}
         onOk={handleOk}
@@ -43,32 +43,31 @@ function ModalDetailQuestions({
     <ModalDetail
       title={
         type === 'common-questions'
-          ? 'Detail Common Questions'
-          : 'Detail Custom Questions'
+          ? 'Chi tiết câu hỏi thường gặp'
+          : 'Chi tiết phản ánh/góp ý từ khách hàng'
       }
       open={isModalDetail}
       onOk={handleOk}
       onCancel={handleCancel}>
       <Title>
-        {type === 'customer-questions'
-          ? 'Title question customer'
-          : 'Title question'}
-        : {data.title}
+        {type === 'customer-questions' ? 'Tiêu đề' : 'Tiêu đề câu hỏi'}:{' '}
+        {data.title}
       </Title>
       <Description>
         {type === 'customer-questions'
-          ? 'Description detail question'
-          : 'Description detail'}
+          ? 'Nội dung chi tiết'
+          : 'Nội dung chi tiết'}
         : {data.description}
       </Description>
       {type === 'customer-questions' && (
         <>
-          <TitleUser>Information of the person reporting</TitleUser>
-          <InfoUser>First name: {data.firstName}</InfoUser>
-          <InfoUser>Last name: {data.lastName}</InfoUser>
+          <TitleUser>Thông tin người phản ánh/góp ý:</TitleUser>
+          <InfoUser>
+            Họ và tên: {data.firstName} {data.lastName}
+          </InfoUser>
           <InfoUser>Email: {data.email}</InfoUser>
-          <InfoUser>Phone number: {data.phoneNumber}</InfoUser>
-          <InfoUser>Gender: {data.userId.sex}</InfoUser>
+          <InfoUser>Số điện thoại: {data.phoneNumber}</InfoUser>
+          <InfoUser>Giới tính: {data.userId.sex}</InfoUser>
         </>
       )}
     </ModalDetail>

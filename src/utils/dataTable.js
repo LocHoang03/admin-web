@@ -50,18 +50,10 @@ export const optionsPur = (max) => {
   return optionsPur;
 };
 
+// table
 export const columns = [
   {
-    title: 'First Name',
-    dataIndex: 'firstName',
-    key: 'firstName',
-    width: '17%',
-    onCell: () => ({
-      style: { fontWeight: '500' },
-    }),
-  },
-  {
-    title: 'Last Name',
+    title: 'Họ',
     dataIndex: 'lastName',
     key: 'lastName',
     width: '17%',
@@ -70,7 +62,17 @@ export const columns = [
     }),
   },
   {
-    title: 'Email Address',
+    title: 'Tên',
+    dataIndex: 'firstName',
+    key: 'firstName',
+    width: '17%',
+    onCell: () => ({
+      style: { fontWeight: '500' },
+    }),
+  },
+
+  {
+    title: 'Địa chỉ email',
     dataIndex: 'email',
     key: 'email',
     width: '36%',
@@ -88,7 +90,7 @@ export const columns = [
   //   }),
   // },
   {
-    title: 'Gender',
+    title: 'Giới tính',
     dataIndex: 'sex',
     key: 'sex',
     width: '10%',
@@ -100,16 +102,7 @@ export const columns = [
 
 export const columns2 = [
   {
-    title: 'First Name',
-    dataIndex: 'firstName',
-    key: 'firstName',
-    width: '25%',
-    onCell: () => ({
-      style: { fontWeight: '500' },
-    }),
-  },
-  {
-    title: 'Last Name',
+    title: 'Họ',
     dataIndex: 'lastName',
     key: 'lastName',
     width: '25%',
@@ -118,7 +111,17 @@ export const columns2 = [
     }),
   },
   {
-    title: 'Type Package',
+    title: 'Tên',
+    dataIndex: 'firstName',
+    key: 'firstName',
+    width: '25%',
+    onCell: () => ({
+      style: { fontWeight: '500' },
+    }),
+  },
+
+  {
+    title: 'Loại gói',
     dataIndex: 'typePack',
     key: 'typePack',
     width: '25%',
@@ -127,7 +130,7 @@ export const columns2 = [
     }),
   },
   {
-    title: 'Price',
+    title: 'Giá',
     dataIndex: 'monthlyPrice',
     key: 'price',
     width: '25%',
@@ -141,21 +144,21 @@ export const columns2 = [
 export const optionsSelect = [
   {
     value: 'day',
-    label: 'Day',
+    label: 'Ngày',
   },
   {
     value: 'month',
-    label: 'Month',
+    label: 'Tháng',
   },
   {
     value: 'year',
-    label: 'Year',
+    label: 'Năm',
   },
 ];
 
 export const tableDataPayment = {
   title5: {
-    title: 'Price package(monthly)',
+    title: 'Giá gói (hàng tháng)',
     dataIndex: 'monthlyPrice',
     key: 'monthlyPrice',
     width: '20%',
@@ -165,7 +168,7 @@ export const tableDataPayment = {
     }),
   },
   title4: {
-    title: 'Type package',
+    title: 'Loại gói',
     dataIndex: 'typePack',
     key: 'typePack',
     width: '20%',
@@ -174,7 +177,7 @@ export const tableDataPayment = {
     }),
   },
   title3: {
-    title: 'Email address',
+    title: 'Địa chỉ email',
     dataIndex: 'email',
     key: 'email',
     width: '25%',
@@ -182,19 +185,20 @@ export const tableDataPayment = {
       style: { fontWeight: '500' },
     }),
   },
-  title2: {
-    title: 'Last Name',
-    dataIndex: 'lastName',
-    key: 'lastName',
+
+  title: {
+    title: 'Tên',
+    dataIndex: 'firstName',
+    key: 'firstName',
     width: '15%',
     onCell: () => ({
       style: { fontWeight: '500' },
     }),
   },
-  title: {
-    title: 'First Name',
-    dataIndex: 'firstName',
-    key: 'firstName',
+  title2: {
+    title: 'Họ',
+    dataIndex: 'lastName',
+    key: 'lastName',
     width: '15%',
     onCell: () => ({
       style: { fontWeight: '500' },
@@ -204,7 +208,7 @@ export const tableDataPayment = {
 
 export const tableDataPackage = {
   title2: {
-    title: 'Monthly price',
+    title: 'Giá hàng tháng',
     dataIndex: 'monthlyPrice',
     key: 'monthlyPrice',
     width: '60%',
@@ -214,7 +218,7 @@ export const tableDataPackage = {
     }),
   },
   title: {
-    title: 'Type package',
+    title: 'Loại gói',
     dataIndex: 'typePack',
     key: 'typePack',
     width: '20%',
@@ -226,7 +230,7 @@ export const tableDataPackage = {
 
 export const tableCommonQuestions = {
   title: {
-    title: 'Title',
+    title: 'Tiêu đề',
     dataIndex: 'title',
     key: 'title',
     width: '70%',
@@ -238,7 +242,7 @@ export const tableCommonQuestions = {
 
 export const tableCustomerQuestions = {
   title4: {
-    title: 'Phone Number',
+    title: 'Số điện thoại',
     dataIndex: 'phoneNumber',
     key: 'phoneNumber',
     width: '15%',
@@ -255,19 +259,20 @@ export const tableCustomerQuestions = {
       style: { fontWeight: '500' },
     }),
   },
-  title2: {
-    title: 'Last Name',
-    dataIndex: 'lastName',
-    key: 'lastName',
+
+  title: {
+    title: 'Tên',
+    dataIndex: 'firstName',
+    key: 'firstName',
     width: '15%',
     onCell: () => ({
       style: { fontWeight: '500' },
     }),
   },
-  title: {
-    title: 'First Name',
-    dataIndex: 'firstName',
-    key: 'firstName',
+  title2: {
+    title: 'Họ',
+    dataIndex: 'lastName',
+    key: 'lastName',
     width: '15%',
     onCell: () => ({
       style: { fontWeight: '500' },

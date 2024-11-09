@@ -11,7 +11,9 @@ function UserContext({ children }) {
 
   const { pathname } = useLocation();
 
+  // lấy thông tin ng dùng nếu đã đăng nhập
   useEffect(() => {
+    // gọi api kèm token nếu đã đăng nhập thì lưu thông tin ng dùng ngược lại là setIsloginj = false tức là chưa đăng nhập
     const fetchUserInfo = async () => {
       setIsLogin(undefined);
       const response = await fetch(API_VERIFY_TOKEN, {
@@ -36,6 +38,7 @@ function UserContext({ children }) {
     }
   }, [pathname]);
 
+  // kiểm tra xem có token tên là: tokenManager hay chưa nếu có thì cho vô set biến setIslogin là true, ngược lại là false
   useEffect(() => {
     setIsLogin(undefined);
     if (localStorage.getItem('tokenManager') && userInfo) {
@@ -67,6 +70,7 @@ function UserContext({ children }) {
     }
   }, [isUpdateUser]);
 
+  //  cập nhạt lại thong tin token
   const updateUserInfo = (token) => {
     const updateToken = async () => {
       await localStorage.removeItem('tokenManager');

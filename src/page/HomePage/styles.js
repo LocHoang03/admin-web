@@ -48,10 +48,11 @@ export const DivTotal = styled.div`
 
     background-color: var(--white);
     & canvas {
-      width: 96% !important;
+      width: 80% !important;
       height: 300px !important;
       padding: 0 16px;
       border-radius: 5px;
+      margin: 0 auto;
     }
   }
 `;

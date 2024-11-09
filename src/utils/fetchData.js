@@ -102,7 +102,7 @@ export const fetchDataSummaryPurchases = async (
   setMaxTotal(total);
   setDatasetPur([
     {
-      label: 'Total Purchases',
+      label: 'Tổng số lần mua',
       data: datasets,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -181,7 +181,7 @@ export const fetchDataSummaryRegister = async (
   setMaxCount(quantity);
   setDataset([
     {
-      label: 'Total Subscriber',
+      label: 'Tổng số người đăng ký',
       data: datasets,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -299,7 +299,7 @@ export const fetchDataSummaryTotalAmountEachPackage = async (
 
   setDatasetPack([
     {
-      label: 'Total Amount Package',
+      label: 'Tổng số tiền các gói',
       data: datasets,
       backgroundColor: [
         'rgb(255, 86, 48)',

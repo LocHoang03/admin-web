@@ -29,7 +29,7 @@ function HeaderAdmin({ bgColor, title }) {
     },
     {
       key: '2',
-      label: <Link to={'/profile'}>Profile</Link>,
+      label: <Link to={'/profile'}>Hồ sơ</Link>,
     },
   ];
   return (

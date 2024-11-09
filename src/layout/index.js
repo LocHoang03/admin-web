@@ -47,37 +47,47 @@ function LayoutAdmin({ children }) {
   const { userInfo } = useContext(RoleContext);
   const items = [
     userInfo.role === 'superAdmin' &&
-      getItem('Statistics', 'statistics', <BarChartOutlined />),
-    getItem('Assets', 'assets', <WalletOutlined />, [
-      getItem('Series', 'series'),
-      getItem('Film for series', 'film-for-series'),
-      getItem('Movies', 'movies'),
-      getItem('Category', 'category'),
-    ]),
-    getItem('Manage', 'manage', <TeamOutlined />, [
-      userInfo.role === 'superAdmin' && getItem('User', 'user'),
-      getItem('Subscriber', 'subscriber'),
-    ]),
-    getItem('Payment', 'payment', <DollarOutlined />),
-    getItem('Subscription price', 'subscription-price', <DollarOutlined />),
-    getItem(
-      'Support customer',
-      'support-customer',
-      <CustomerServiceOutlined />,
-    ),
-    getItem('Question', 'question', <QuestionCircleOutlined />, [
-      getItem('Common questions', 'common-questions'),
-      getItem('Customer Questions', 'customer-questions'),
-    ]),
-    getItem('Banned Account', 'banned account', <LockOutlined />, [
-      getItem('Subscriber', 'banned-subscriber'),
-    ]),
-    getItem('Trash', 'trash', <RestOutlined />, [
-      getItem('Series', 'trash-series'),
-      getItem('Movies', 'trash-movies'),
-      getItem('Film for series', 'trash-film-for-series'),
-    ]),
-    getItem('Logout', 'logout', <LogoutOutlined />),
+      getItem('Thống kê', 'statistics', <BarChartOutlined />),
+    userInfo.role !== 'adminCustom' &&
+      getItem('Tài sản', 'assets', <WalletOutlined />, [
+        getItem('Phim bộ', 'series'),
+        getItem('Các tập của phim bộ', 'film-for-series'),
+        getItem('Phim lẻ', 'movies'),
+        getItem('Thể loại', 'category'),
+      ]),
+    userInfo.role !== 'adminFilm' &&
+      getItem('Quản lý', 'manage', <TeamOutlined />, [
+        userInfo.role === 'superAdmin' &&
+          getItem('Tài khoản nhân viên', 'user'),
+        userInfo.role !== 'adminFilm' &&
+          getItem('Tài khoản khách hàng', 'subscriber'),
+      ]),
+    userInfo.role !== 'adminCustom' &&
+      getItem('Thanh toán', 'payment', <DollarOutlined />),
+    userInfo.role !== 'adminCustom' &&
+      getItem('Gói mua hàng', 'subscription-price', <DollarOutlined />),
+    userInfo.role !== 'adminFilm' &&
+      getItem(
+        'Chăm sóc khách hàng',
+        'support-customer',
+        <CustomerServiceOutlined />,
+      ),
+    userInfo.role !== 'adminFilm' &&
+      getItem('Câu hỏi', 'question', <QuestionCircleOutlined />, [
+        getItem('Câu hỏi thường gặp', 'common-questions'),
+        getItem('Câu hỏi từ khách hàng', 'customer-questions'),
+      ]),
+    userInfo.role !== 'adminFilm' &&
+      getItem('Khóa tài khoản', 'banned account', <LockOutlined />, [
+        getItem('Khách hàng', 'banned-subscriber'),
+      ]),
+    userInfo.role !== 'adminCustom' &&
+      getItem('Thùng rác', 'trash', <RestOutlined />, [
+        getItem('Phim bộ', 'trash-series'),
+        getItem('Các tập của phim bộ', 'trash-film-for-series'),
+        getItem('Phim lẻ', 'trash-movies'),
+      ]),
+    getItem('Đăng xuất', 'logout', <LogoutOutlined />),
   ];
 
   const navigate = useNavigate();
@@ -99,8 +109,8 @@ function LayoutAdmin({ children }) {
     newSocket.on('test', (newMessage) => {
       console.log('vào đây ko', newMessage);
     });
+    //  nhận tin nhắn từ khách hàng
     newSocket.on('receiveChatCustomer', (newMessage) => {
-      console.log('vào đây ko', newMessage);
       setMessage((prev) => ({
         ...prev,
         [newMessage.roomId]: [
@@ -110,6 +120,7 @@ function LayoutAdmin({ children }) {
       }));
     });
 
+    //  xóa các phòng k phải do user này đảm nhận
     newSocket.on('delete-room', (data) => {
       console.log(data);
       if (userInfo.userId !== data.userId) {
@@ -119,11 +130,13 @@ function LayoutAdmin({ children }) {
       }
     });
 
+    // rời khỏi đoạn chat
     newSocket.on('forceLeave', (roomId) => {
       setVisible((prev) => ({ ...prev, [roomId]: true }));
       newSocket.emit('leaveRoom', roomId);
     });
 
+    //  nhận phòng chat mới
     newSocket.on('room', (data) => {
       setListChat((prev) => [...prev, data]);
 
@@ -150,6 +163,7 @@ function LayoutAdmin({ children }) {
     );
   }, [window.location.pathname]);
 
+  //  lấy các đoạn chat đang còn chat(chưa out phòng)
   useEffect(() => {
     const fetchListChat = async () => {
       const response = await fetch(API_GET_ON_MESSAGE, {
@@ -198,6 +212,7 @@ function LayoutAdmin({ children }) {
     navigate(`/${select}`);
   };
 
+  //  out chat
   const handleOutRoom = (roomId) => {
     setVisible((prev) => ({ ...prev, [roomId]: false }));
     setMessage((prev) => {

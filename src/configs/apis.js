@@ -3,9 +3,7 @@ export const API_FETCH_ALL_CUSTOMER_QUESTIONS = `${process.env.REACT_APP_PUBLIC_
 export const API_CREATE_COMMON_QUESTIONS = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/common-questions/create`;
 export const API_UPDATE_COMMON_QUESTIONS = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/common-questions/update`;
 export const API_DELETE_COMMON_QUESTIONS = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/common-questions/delete`;
-
 export const API_RESOLVE_CUSTOMER_QUESTIONS = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/customer-questions/resolve-question`;
-
 export const API_SERIES = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/film/series`;
 export const API_MOVIES = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/film/movies`;
 export const API_CREATE_MOVIES = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/film/movies/create-movies`;
@@ -48,11 +46,8 @@ export const API_CHANGE_PASSWORD = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}
 export const API_CHANGE_AVATAR = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/auth/change-avatar?user=user`;
 export const API_DELETE_AVATAR = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/auth/delete-avatar?user=user`;
 export const API_VERIFY_TOKEN = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/auth/verify-token`;
-
 export const API_CREATE_MESSAGE = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/message/create`;
 export const API_UPDATE_MESSAGE = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/message/update`;
 export const API_UPDATE_OFF_MESSAGE = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/message/update-off`;
-
 export const API_UPDATE_JOIN_MESSAGE = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/admin/message/join-chat`;
-
 export const API_GET_ON_MESSAGE = `${process.env.REACT_APP_PUBLIC_HOST_BACKEND}/message/get-on`;

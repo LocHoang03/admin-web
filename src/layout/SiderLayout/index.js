@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const { Sider } = Layout;
 
+// render ra menu chức năng
 function SiderAdmin(props) {
   const navigate = useNavigate();
   const handleChangeValue = async (selectedKey) => {

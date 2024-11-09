@@ -110,6 +110,7 @@ function ModalAdd(props) {
             email: dataRecord.email,
             phoneNumber: dataRecord.phoneNumber,
             sex: dataRecord.sex,
+            typeAccount: dataRecord.role,
           });
         }
         break;

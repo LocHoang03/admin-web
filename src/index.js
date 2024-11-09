@@ -8,6 +8,7 @@ import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import UserContext from './contexts/UserContext';
 
+//  nơi sinh ra giao diện cuối , đổi đường dẫn trang
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

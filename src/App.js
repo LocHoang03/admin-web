@@ -18,6 +18,7 @@ function App() {
   const { userInfo, isLogin } = useContext(RoleContext);
   const location = useLocation();
   const navigate = useNavigate();
+  // kiểm tra token đăng nhập nếu hết hạn thì bị đảy ra trang đăng nhập
   useEffect(() => {
     if (localStorage.getItem('tokenManager')) {
       const tokenDecoded = jwtDecode(localStorage.getItem('tokenManager'));

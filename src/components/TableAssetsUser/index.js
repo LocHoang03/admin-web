@@ -18,7 +18,7 @@ function TableAssetsUser(props) {
   };
 
   const handleDelete = (id) => {
-    props.setTextModal('Are you sure you want to delete this account?');
+    props.setTextModal('Bạn có chắc chắn muốn xóa tài khoản này?');
     props.setUserIdReset(id);
     props.setIsOptions(1);
     props.setIsModalOpen(true);
@@ -27,7 +27,7 @@ function TableAssetsUser(props) {
     props.setUserIdReset(record._id);
     props.setIsOptions(2);
     props.setTextModal(
-      "Are you sure you want to reset this account's password?",
+      'Bạn có chắc chắn muốn đặt lại mật khẩu của tài khoản này không?',
     );
     props.setIsModalOpen(true);
   };
@@ -35,20 +35,20 @@ function TableAssetsUser(props) {
   const handleBanned = (record) => {
     props.setUserIdReset(record._id);
     props.setIsOptions(3);
-    props.setTextModal('Are you sure you want to banned this account?');
+    props.setTextModal('Bạn có chắc chắn muốn cấm tài khoản này?');
     props.setIsModalOpen(true);
   };
   const handleRecover = (record) => {
     props.setUserIdReset(record._id);
     props.setIsOptions(4);
-    props.setTextModal('Are you sure you want to recover this account?');
+    props.setTextModal('Bạn có chắc chắn muốn khôi phục tài khoản này không?');
     props.setIsModalOpen(true);
   };
 
   useEffect(() => {
     let dataSource = [
       {
-        title: 'Action',
+        title: 'Hành động',
         key: 'action',
         width: userInfo.role === 'superAdmin' ? '30%' : '5%',
         onCell: () => ({
@@ -59,7 +59,7 @@ function TableAssetsUser(props) {
             size="large"
             className={props.type !== 'banned-subscriber' && 'row-gap-space'}>
             <ButtonAction onClick={() => handleDetail(record)}>
-              <TagAction color="processing">Detail</TagAction>
+              <TagAction color="processing">Chi tiết</TagAction>
             </ButtonAction>
             {
               <>
@@ -73,7 +73,7 @@ function TableAssetsUser(props) {
                             props.setDataRecord(record);
                             props.setIsModal(true);
                           }}>
-                          Update
+                          Cập nhật
                         </TagAction>
                       </ButtonAction>
                     )}
@@ -82,7 +82,7 @@ function TableAssetsUser(props) {
                       <TagAction
                         color="warning"
                         onClick={() => handleUpdate(record)}>
-                        Reset Password
+                        Đặt lại mật khẩu
                       </TagAction>
                     </ButtonAction>
                     {props.type !== 'user' && (
@@ -90,7 +90,7 @@ function TableAssetsUser(props) {
                         <TagAction
                           color="error"
                           onClick={() => handleBanned(record)}>
-                          Banned
+                          Cấm
                         </TagAction>
                       </ButtonAction>
                     )}
@@ -100,12 +100,12 @@ function TableAssetsUser(props) {
                     <TagAction
                       color="warning"
                       onClick={() => handleRecover(record)}>
-                      Recover
+                      Khôi phục
                     </TagAction>
                   </ButtonAction>
                 )}
                 <ButtonAction onClick={() => handleDelete(record._id)}>
-                  <TagAction color="error">Delete</TagAction>
+                  <TagAction color="error">Xóa</TagAction>
                 </ButtonAction>
               </>
             }
