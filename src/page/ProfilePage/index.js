@@ -92,7 +92,7 @@ function ProfilePage() {
       ),
     },
   ]);
-
+  // xu ly trc khi ra trang
   useEffect(() => {
     if (userInfo) {
       setUser(userInfo);

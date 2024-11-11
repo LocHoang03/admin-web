@@ -48,6 +48,7 @@ function UserContext({ children }) {
     }
   }, [pathname]);
 
+  // update ho so user
   useEffect(() => {
     setIsUpdateUser(false);
     const fetchUserInfo = async () => {

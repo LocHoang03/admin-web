@@ -73,6 +73,7 @@ function SettingPage(props) {
   useEffect(() => {
     let pageNum = getPage();
 
+    //  phan trang
     if (look === undefined) {
       if (props.type === 'common-questions') {
         Promise.all([dispatch(fetchAllCommonQuestions(pageNum))]);
@@ -124,6 +125,7 @@ function SettingPage(props) {
     setIsModalOpen(false);
   };
 
+  // lay trang hien tai
   const getPage = () => {
     let pageNum;
     if (location.search !== '') {

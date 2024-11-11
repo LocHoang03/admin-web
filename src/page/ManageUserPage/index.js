@@ -135,6 +135,7 @@ function ManageUserPage(props) {
     else setPage(1);
   }, [props.type, userInfo, pageCurrent]);
 
+  // dropdown email
   useEffect(() => {
     const fetchEmail = async () => {
       const API_EMAIL =
