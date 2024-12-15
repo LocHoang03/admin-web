@@ -49,7 +49,7 @@ function LayoutAdmin({ children }) {
     userInfo.role === 'superAdmin' &&
       getItem('Thống kê', 'statistics', <BarChartOutlined />),
     userInfo.role !== 'adminCustom' &&
-      getItem('Tài sản', 'assets', <WalletOutlined />, [
+      getItem('Quản lý phim', 'assets', <WalletOutlined />, [
         getItem('Phim bộ', 'series'),
         getItem('Các tập của phim bộ', 'film-for-series'),
         getItem('Phim lẻ', 'movies'),
@@ -106,9 +106,7 @@ function LayoutAdmin({ children }) {
   useEffect(() => {
     setSocket(newSocket);
     setSocketUser(newSocketUser);
-    newSocket.on('test', (newMessage) => {
-      console.log('vào đây ko', newMessage);
-    });
+    newSocket.on('test', (newMessage) => {});
     //  nhận tin nhắn từ khách hàng
     newSocket.on('receiveChatCustomer', (newMessage) => {
       setMessage((prev) => ({
@@ -122,7 +120,6 @@ function LayoutAdmin({ children }) {
 
     //  xóa các phòng k phải do user này đảm nhận
     newSocket.on('delete-room', (data) => {
-      console.log(data);
       if (userInfo.userId !== data.userId) {
         setListChat((prev) =>
           prev.filter((item) => item.roomId !== data.roomId),

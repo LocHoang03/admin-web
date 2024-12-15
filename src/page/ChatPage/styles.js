@@ -414,7 +414,7 @@ export const DivInfoOut = styled.div`
 `;
 
 export const ButtonInfo = styled.button`
-  width: 100px;
+  width: 200px;
   margin-top: 10px;
   font-size: 16px;
   font-weight: 500;

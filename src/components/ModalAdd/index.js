@@ -139,7 +139,13 @@ function ModalAdd(props) {
   };
   return (
     <Modal
-      title={dataRecord !== undefined ? `Update Data` : `Add Data`}
+      title={
+        dataRecord === undefined
+          ? `Thêm`
+          : type !== 'customer-questions'
+          ? 'Cập nhật'
+          : 'Giải quyết'
+      }
       open={props.isModal}
       onCancel={handleCancel}
       footer={null}>

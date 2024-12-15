@@ -191,7 +191,7 @@ function SettingPage(props) {
             props.type === 'common-questions' && (
               <DivAction>
                 <Button type="primary" onClick={showModal}>
-                  Add
+                  Thêm
                 </Button>
               </DivAction>
             )}

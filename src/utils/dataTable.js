@@ -14,9 +14,10 @@ export const options = (max) => {
       y: {
         beginAtZero: true,
         min: 0,
-        max: max * 10,
+        max: Math.ceil(max * 10), // Đảm bảo max là số nguyên
         ticks: {
           stepSize: 5,
+          callback: (value) => Math.round(value), // Làm tròn số
         },
       },
     },
@@ -40,9 +41,10 @@ export const optionsPur = (max) => {
       y: {
         beginAtZero: true,
         min: 0,
-        max: max + 50,
+        max: Math.ceil(max + 1000000), // Đảm bảo max là số nguyên
         ticks: {
-          stepSize: 10,
+          stepSize: 100000,
+          callback: (value) => Math.round(value), // Làm tròn số
         },
       },
     },
@@ -94,6 +96,7 @@ export const columns = [
     dataIndex: 'sex',
     key: 'sex',
     width: '10%',
+    render: (text) => (text ? text : 'Chưa cập nhật'),
     onCell: () => ({
       style: { fontWeight: '500' },
     }),
@@ -134,7 +137,11 @@ export const columns2 = [
     dataIndex: 'monthlyPrice',
     key: 'price',
     width: '25%',
-    render: (text) => `$${text}`,
+    render: (text) =>
+      `${text.toLocaleString('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })} VND`,
     onCell: () => ({
       style: { fontWeight: '500' },
     }),
@@ -162,7 +169,11 @@ export const tableDataPayment = {
     dataIndex: 'monthlyPrice',
     key: 'monthlyPrice',
     width: '20%',
-    render: (text) => `$${text}`,
+    render: (text) =>
+      `${text.toLocaleString('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })} VND`,
     onCell: () => ({
       style: { fontWeight: '500' },
     }),
@@ -212,7 +223,11 @@ export const tableDataPackage = {
     dataIndex: 'monthlyPrice',
     key: 'monthlyPrice',
     width: '60%',
-    render: (text) => `$${text}`,
+    render: (text) =>
+      `${text.toLocaleString('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })} VND`,
     onCell: () => ({
       style: { fontWeight: '500' },
     }),
@@ -246,6 +261,7 @@ export const tableCustomerQuestions = {
     dataIndex: 'phoneNumber',
     key: 'phoneNumber',
     width: '15%',
+    render: (text) => (text ? text : 'Chưa cập nhật'),
     onCell: () => ({
       style: { fontWeight: '500' },
     }),

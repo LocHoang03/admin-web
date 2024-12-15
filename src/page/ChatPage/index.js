@@ -86,7 +86,6 @@ function ChatPage() {
   const [isLoad, setIsLoad] = useState(false);
   const [error, setError] = useState(false);
   const inputRef = useRef(null);
-
   const { userInfo } = useContext(RoleContext);
 
   const handleSubmitChat = async (e, roomId) => {
@@ -358,6 +357,9 @@ function ChatPage() {
     );
   }
 
+  console.log(
+    listChat.map((chat) => console.log(chat.adminId === userInfo.userId)),
+  );
   return (
     <DivContainerChat>
       <RowContainer>
@@ -365,7 +367,8 @@ function ChatPage() {
           <DivLeft>
             <h2>Tin nhắn trò chuyện</h2>
             <ListChat>
-              {listChat && listChat.length > 0 ? (
+              {listChat &&
+                listChat.length > 0 &&
                 listChat.map((item, id) => {
                   if (item.adminId === userInfo.userId || !item.adminId) {
                     return (
@@ -402,8 +405,13 @@ function ChatPage() {
                       </ItemChat>
                     );
                   }
-                })
-              ) : (
+                })}
+              {(listChat.length < 1 ||
+                (listChat.length > 0 &&
+                  !listChat.some((chat) => !chat.adminId) &&
+                  listChat.every(
+                    (chat) => chat.adminId !== userInfo.userId,
+                  ))) && (
                 <DivInfo>
                   <h3>Không có cuộc trò chuyện</h3>
                 </DivInfo>
@@ -414,7 +422,8 @@ function ChatPage() {
         <ColContainer span={16}>
           <DivRight>
             <ListMessage>
-              {listChat && listChat.length > 0 ? (
+              {listChat &&
+                listChat.length > 0 &&
                 listChat.map((item, id) => {
                   if (item.adminId === userInfo.userId || !item.adminId) {
                     return (
@@ -711,10 +720,15 @@ function ChatPage() {
                       )
                     );
                   }
-                })
-              ) : (
+                })}
+              {(listChat.length < 1 ||
+                (listChat.length > 0 &&
+                  !listChat.some((chat) => !chat.adminId) &&
+                  listChat.every(
+                    (chat) => chat.adminId !== userInfo.userId,
+                  ))) && (
                 <DivInfo>
-                  <h3>Không có cuộc trò chuyện có sẵn vào lúc này.</h3>
+                  <h3>Không có cuộc trò chuyện</h3>
                 </DivInfo>
               )}
             </ListMessage>

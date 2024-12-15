@@ -102,7 +102,7 @@ export const fetchDataSummaryPurchases = async (
   setMaxTotal(total);
   setDatasetPur([
     {
-      label: 'Tổng số lần mua',
+      label: 'Tổng số tiền doanh thu',
       data: datasets,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',

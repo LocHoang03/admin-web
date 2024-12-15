@@ -125,13 +125,13 @@ function FormAddUser(props) {
           <>
             <ItemForm
               label={'Họ'}
-              name="lastName"
+              name="firstName"
               message={`Vui lòng nhập họ!`}
               input={<Input />}
             />
             <ItemForm
               label={'Tên'}
-              name="firstName"
+              name="lastName"
               message={`Vui lòng nhập tên!`}
               input={<Input />}
             />

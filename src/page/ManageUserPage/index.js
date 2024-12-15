@@ -1,4 +1,4 @@
-import { Button, Modal } from 'antd';
+import { Button, Modal, Form, Input, message } from 'antd';
 import {
   DivManage,
   DivAction,
@@ -37,6 +37,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import LookInfo from '../../components/Common/LookComponent';
 import { API_GET_ALL_SUBSCRIBER, API_GET_ALL_USER } from '../../configs/apis';
+import ItemForm from '../../components/Common/ItemFormAdd';
 
 function ManageUserPage(props) {
   const { userInfo } = useContext(RoleContext);
@@ -107,6 +108,7 @@ function ManageUserPage(props) {
         dataIndex: 'sex',
         key: 'sex',
         width: userInfo.role === 'superAdmin' ? '20%' : '15%',
+        render: (text) => (text ? text : 'Chưa cập nhật'),
         onCell: () => ({
           style: { fontWeight: '500' },
         }),
@@ -248,26 +250,26 @@ function ManageUserPage(props) {
   };
 
   const handleOk = async () => {
-    const data = {
+    const dataUpdate = {
       userId: userIdReset,
       type: props.type,
     };
     if (isOptions === 1) {
       if (props.type === 'user') {
-        Promise.all([dispatch(deleteUser(data))]);
+        Promise.all([dispatch(deleteUser(dataUpdate))]);
       } else {
-        Promise.all([dispatch(deleteSubscriber(data))]);
+        Promise.all([dispatch(deleteSubscriber(dataUpdate))]);
       }
     } else if (isOptions === 2) {
       if (props.type === 'user') {
-        Promise.all([dispatch(resetPasswordUser(data))]);
+        Promise.all([dispatch(resetPasswordUser(dataUpdate))]);
       } else {
-        Promise.all([dispatch(resetPasswordSubscriber(data))]);
+        Promise.all([dispatch(resetPasswordSubscriber(dataUpdate))]);
       }
     } else if (isOptions === 3) {
-      Promise.all([dispatch(postBannedSubscriber(data))]);
+      Promise.all([dispatch(postBannedSubscriber(dataUpdate))]);
     } else {
-      Promise.all([dispatch(postRecoverSubscriber(data))]);
+      Promise.all([dispatch(postRecoverSubscriber(dataUpdate))]);
     }
 
     setUserIdReset();
@@ -340,6 +342,43 @@ function ManageUserPage(props) {
 
   const filterOption = (input, option) =>
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
+  const onFinish = async (values) => {
+    const dataUpdate = {
+      userId: userIdReset,
+      type: props.type,
+      lockReason: values.lockReason,
+    };
+    console.log(dataUpdate);
+    try {
+      Promise.all([dispatch(postBannedSubscriber(dataUpdate))]);
+      setUserIdReset();
+      setIsModalOpen(false);
+
+      // if (data.length - 1 === 0 && page > 1) {
+      //   setPage((prev) => prev - 1);
+      //   if (look) {
+      //     navigate(
+      //       '/' +
+      //         props.type +
+      //         '?look=true&page=' +
+      //         (page - 1) +
+      //         '&firstName=' +
+      //         firstName +
+      //         '&lastName=' +
+      //         lastName +
+      //         '&email=' +
+      //         email +
+      //         '&gender=' +
+      //         gender,
+      //     );
+      //   } else navigate('/' + props.type + '?page=' + (page - 1));
+      // }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  const onFinishFailed = (errorInfo) => {};
 
   if (isLoading || loading) {
     return (
@@ -431,15 +470,53 @@ function ManageUserPage(props) {
           isOptions === 1
             ? 'Xóa'
             : isOptions === 2
-            ? 'Đặt lại MK'
+            ? 'Đặt lại mật khẩu'
             : isOptions === 3
             ? 'Khóa'
             : 'Khôi phục'
         }
         open={isModalOpen}
         onOk={handleOk}
+        footer={isOptions === 3 ? null : undefined}
         onCancel={handleCancel}>
-        <p>{textModal}</p>
+        {isOptions !== 3 ? (
+          <p>{textModal}</p>
+        ) : (
+          <Form
+            name="lockReasonForm"
+            labelCol={{
+              span: 24,
+            }}
+            wrapperCol={{
+              span: 24,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off">
+            <ItemForm
+              label="Lý do khóa"
+              name="lockReason"
+              message="Vui lòng nhập lý do khóa tài khoản!"
+              input={<Input />}
+            />
+
+            <Form.Item
+              className="button-form"
+              style={{
+                marginTop: '35px',
+                marginBottom: '20px',
+                backgroundColor: '#22c5d4',
+                borderRadius: '20px',
+              }}
+              wrapperCol={{
+                span: 24,
+              }}>
+              <Button htmlType="submit" style={{ color: 'white' }}>
+                Xác nhận
+              </Button>
+            </Form.Item>
+          </Form>
+        )}
       </Modal>
     </>
   );

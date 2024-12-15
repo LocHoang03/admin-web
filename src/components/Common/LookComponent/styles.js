@@ -28,6 +28,7 @@ export const BtnLook = styled.button`
   padding: 7px 16px;
   color: var(--white);
   cursor: pointer;
+  width: 100px;
   &:hover {
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.08);
     opacity: 0.9;

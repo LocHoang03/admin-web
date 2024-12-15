@@ -90,7 +90,7 @@ function TableAssetsUser(props) {
                         <TagAction
                           color="error"
                           onClick={() => handleBanned(record)}>
-                          Cấm
+                          Khóa
                         </TagAction>
                       </ButtonAction>
                     )}

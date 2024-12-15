@@ -75,11 +75,14 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
           ? 'Chi tiết thể loại'
           : type !== 'film-for-series' &&
             type !== 'trash-film-for-series' &&
-            type !== 'payment'
+            type !== 'payment' &&
+            type !== 'subscription-price'
           ? 'Chi tiết phim'
-          : type !== 'payment'
+          : type !== 'payment' && type !== 'subscription-price'
           ? 'Chi tiết tập phim ' + data.seriesId.title
-          : 'Chi tiết gói'
+          : type !== 'payment'
+          ? 'Chi tiết gói'
+          : 'Chi tiết gói mua hàng'
       }
       open={isModalDetail}
       onOk={handleOk}
@@ -137,85 +140,102 @@ function ModalDetailAssets({ setIsModalDetail, isModalDetail, asset, type }) {
                 </VideoDetail>
               </DivVideo>
             )}
-            <DivInfoDetail>
-              <InfoDetail>
-                <h2>Thông tin chi tiết </h2>
-                {type !== 'payment' && type !== 'subscription-price' && (
-                  <InfoItem>Mô tả: {data.description}</InfoItem>
-                )}
-                {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Đạo diễn: {data.director}</InfoItem>
-                )}
-                {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Dàn diễn viên: {data.cast}</InfoItem>
-                )}
-                {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Thời lượng: {data.duration} minute</InfoItem>
-                )}
-                {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Quốc gia: {data.country.join(', ')}</InfoItem>
-                )}
+            {type !== 'subscription-price' && (
+              <DivInfoDetail>
+                <InfoDetail>
+                  <h2>Thông tin chi tiết </h2>
+                  {type !== 'payment' && type !== 'subscription-price' && (
+                    <InfoItem>Mô tả: {data.description}</InfoItem>
+                  )}
+                  {(type === 'movies' || type === 'series') && (
+                    <InfoItem>Đạo diễn: {data.director}</InfoItem>
+                  )}
+                  {(type === 'movies' || type === 'series') && (
+                    <InfoItem>Dàn diễn viên: {data.cast}</InfoItem>
+                  )}
+                  {(type === 'movies' || type === 'series') && (
+                    <InfoItem>Thời lượng: {data.duration} minute</InfoItem>
+                  )}
+                  {(type === 'movies' || type === 'series') && (
+                    <InfoItem>Quốc gia: {data.country.join(', ')}</InfoItem>
+                  )}
 
-                {type !== 'payment' && type !== 'subscription-price' && (
-                  <InfoItem>Đánh giá: {data.rating}/5</InfoItem>
-                )}
-                {(type === 'movies' || type === 'series') && (
-                  <InfoItem>Năm sản xuất: {data.releaseDate}</InfoItem>
-                )}
+                  {type !== 'payment' && type !== 'subscription-price' && (
+                    <InfoItem>Đánh giá: {data.rating}/5</InfoItem>
+                  )}
+                  {(type === 'movies' || type === 'series') && (
+                    <InfoItem>Năm sản xuất: {data.releaseDate}</InfoItem>
+                  )}
 
-                {type === 'payment' && (
-                  <>
-                    <InfoItem>
-                      Họ và tên: {data.userId.firstName} {data.userId.lastName}
-                    </InfoItem>
-                    <InfoItem>Email: {data.userId.email}</InfoItem>
-                    <InfoItem>
-                      Số điện thoại: {data.userId.phoneNumber}
-                    </InfoItem>
-                    <InfoItem>
-                      Loại gói đăng ký đang dùng: {data.typePack}
-                    </InfoItem>
-                    <InfoItem>Giá hàng tháng: ${data.monthlyPrice}</InfoItem>
-                  </>
-                )}
+                  {type === 'payment' && (
+                    <>
+                      <InfoItem>
+                        Họ và tên: {data.userId.firstName}{' '}
+                        {data.userId.lastName}
+                      </InfoItem>
+                      <InfoItem>Email: {data.userId.email}</InfoItem>
+                      <InfoItem>
+                        Số điện thoại: {data.userId.phoneNumber}
+                      </InfoItem>
+                      <InfoItem>
+                        Loại gói đăng ký đang dùng: {data.typePack}
+                      </InfoItem>
+                      <InfoItem>
+                        Giá hàng tháng:{' '}
+                        {data.monthlyPrice.toLocaleString('en-US', {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        })}{' '}
+                        VND
+                      </InfoItem>
+                    </>
+                  )}
 
+                  {type !== 'subscription-price' && (
+                    <InfoItem>
+                      Ngày tạo: {dayjs(data.createAt).format('DD-MM-YYYY')}
+                    </InfoItem>
+                  )}
+                  {type === 'payment' && (
+                    <InfoItem>
+                      Ngày hết hạn:{' '}
+                      {dayjs(data.expirationDate).format('DD-MM-YYYY')}
+                    </InfoItem>
+                  )}
+                </InfoDetail>
                 {type !== 'subscription-price' && (
-                  <InfoItem>
-                    Ngày tạo: {dayjs(data.createAt).format('DD-MM-YYYY')}
-                  </InfoItem>
+                  <DivImage>
+                    <h2>
+                      {type !== 'payment'
+                        ? 'Hình ảnh phim'
+                        : 'Hình ảnh người dùng'}
+                    </h2>
+                    <Image
+                      width={type !== 'payment' ? 250 : 300}
+                      height={350}
+                      src={
+                        data && data.userId && data.userId.avatarUser.url
+                          ? data.userId.avatarUser.url
+                          : data.imageUrl.url
+                      }
+                      alt={data.title || 'image user'}
+                    />
+                  </DivImage>
                 )}
-                {type === 'payment' && (
-                  <InfoItem>
-                    Ngày hết hạn:{' '}
-                    {dayjs(data.expirationDate).format('DD-MM-YYYY')}
-                  </InfoItem>
-                )}
-              </InfoDetail>
-              {type !== 'subscription-price' && (
-                <DivImage>
-                  <h2>
-                    {type !== 'payment'
-                      ? 'Hình ảnh phim'
-                      : 'Hình ảnh người dùng'}
-                  </h2>
-                  <Image
-                    width={250}
-                    height={350}
-                    src={
-                      data && data.userId && data.userId.avatarUser.url
-                        ? data.userId.avatarUser.url
-                        : data.imageUrl.url
-                    }
-                    alt={data.title || 'image user'}
-                  />
-                </DivImage>
-              )}
-            </DivInfoDetail>
+              </DivInfoDetail>
+            )}
             {type === 'subscription-price' && (
               <DivInfo>
                 <ListInfo>
                   <ItemInfo>Loại gói: {data.typePack}</ItemInfo>
-                  <ItemInfo>Giá hàng tháng: ${data.monthlyPrice}</ItemInfo>
+                  <ItemInfo>
+                    Giá hàng tháng:{' '}
+                    {data.monthlyPrice.toLocaleString('en-US', {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}{' '}
+                    VND
+                  </ItemInfo>
                   <ItemInfo>
                     Chất lượng hình ảnh: {data.qualityPicture}
                   </ItemInfo>

@@ -89,13 +89,13 @@ function FormUpdateProfile(props) {
             autoComplete="off">
             <InputItem
               label="Họ"
-              name="lastName"
+              name="firstName"
               message="Vui lòng nhập họ của bạn!"
               input={<Input />}
             />
             <InputItem
               label="Tên"
-              name="firstName"
+              name="lastName"
               message="Vui lòng nhập tên của bạn!"
               input={<Input />}
             />

@@ -593,11 +593,16 @@ function AssetsPage(props) {
               setDataRecord={setDataRecord}
             />
           </FormModalContext.Provider>
-          <DivAction>
-            <Button type="primary" onClick={showModal}>
-              Thêm
-            </Button>
-          </DivAction>
+          {props.type !== 'trash-film-for-series' &&
+            props.type !== 'trash-series' &&
+            props.type !== 'trash-movies' && (
+              <DivAction>
+                <Button type="primary" onClick={showModal}>
+                  Thêm
+                </Button>
+              </DivAction>
+            )}
+
           {props.type === 'movies' && (
             <>
               <ButtonImport onClick={handleImport}>
@@ -607,7 +612,7 @@ function AssetsPage(props) {
               <Modal
                 open={isModalUpload}
                 onCancel={handleCancelUpload}
-                title="Upload file"
+                title="Tải tập tin lên"
                 footer={(_) => (
                   <>
                     <CSVLink
@@ -669,9 +674,7 @@ function AssetsPage(props) {
 
       <Modal
         title={
-          props.type === 'movies' || props.type === 'series'
-            ? 'Thêm dữ liệu '
-            : typeModal === 'delete'
+          typeModal === 'delete'
             ? 'Xóa dữ liệu'
             : typeModal === 'recover'
             ? 'Khôi phục dữ liệu'

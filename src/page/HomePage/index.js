@@ -160,8 +160,14 @@ function HomePage(props) {
         <ColSummary span={6}>
           <div className="margin-left-0">
             <DivInfo>
-              <h4>THU NHẬP (HÀNG THÁNG)</h4>
-              <label>${dataSummary.totalPurMonth}</label>
+              <h4>DOANH THU (HÀNG THÁNG)</h4>
+              <label>
+                {dataSummary.totalPurMonth.toLocaleString('en-US', {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}{' '}
+                VND
+              </label>
             </DivInfo>
             <DivIcon>
               <EuroCircleFilled />
@@ -171,8 +177,14 @@ function HomePage(props) {
         <ColSummary span={6}>
           <div>
             <DivInfo>
-              <h4>THU NHẬP (HÀNG NĂM)</h4>
-              <label>${dataSummary.totalPur}</label>
+              <h4>DOANH THU (HÀNG NĂM)</h4>
+              <label>
+                {dataSummary.totalPur.toLocaleString('en-US', {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}{' '}
+                VND
+              </label>
             </DivInfo>
             <DivIcon>
               <EuroCircleFilled />
@@ -242,7 +254,7 @@ function HomePage(props) {
           <DivTotal>
             <div>
               <DivSelectAndTitle>
-                <h3>Tổng số tiền thu nhập</h3>
+                <h3>Tổng số tiền doanh thu</h3>
                 <DivSelectAndExport>
                   <Select
                     options={optionsSelect}
@@ -279,7 +291,7 @@ function HomePage(props) {
           <RowSummaryToday>
             <ColSummaryToday>
               <DivSummaryToday>
-                <Title>Tổng số tiền từng gói trong năm</Title>
+                <Title>Tổng số tiền doanh thu từng gói phim trong năm</Title>
                 <DataToday>
                   <div>
                     <Doughnut

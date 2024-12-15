@@ -17,3 +17,7 @@ code {
   --login-bg: #44425b;
   --btn-form: #83e4ed;
 }
+
+.btn-180 {
+  width: 180px !important;
+}

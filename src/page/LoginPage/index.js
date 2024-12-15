@@ -75,7 +75,7 @@ function LoginPage() {
             <LogoImage height="60" width="300" />
           </DivLogo>
           <DivTitle>
-            <h2>Welcome Back!!</h2>
+            <h2>Chào mừng trở lại!!</h2>
           </DivTitle>
           <DivForm>
             <Form

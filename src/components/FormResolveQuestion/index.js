@@ -38,9 +38,11 @@ function FormResolveQuestion(props) {
   return (
     <>
       {contextHolder}
-      <Title>Title question customer: {dataRecord && dataRecord.title}</Title>
+      <Title>
+        Tiêu đề câu hỏi khách hàng: {dataRecord && dataRecord.title}
+      </Title>
       <Description>
-        Description detail question: {dataRecord && dataRecord.description}
+        Câu hỏi chi tiết mô tả: {dataRecord && dataRecord.description}
       </Description>
       <Form
         form={props.form}

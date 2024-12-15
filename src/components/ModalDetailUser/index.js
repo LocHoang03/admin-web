@@ -35,7 +35,7 @@ function ModalDetailUser({ setIsModalDetail, isModalDetail, asset, type }) {
         onCancel={handleCancel}
         footer={[
           <Button key="ok" type="primary" onClick={handleOk}>
-            OK
+            Đồng ý
           </Button>,
         ]}
         className="modal-detail-user">
@@ -52,7 +52,7 @@ function ModalDetailUser({ setIsModalDetail, isModalDetail, asset, type }) {
       onCancel={handleCancel}
       footer={[
         <Button key="ok" type="primary" onClick={handleOk}>
-          OK
+          Đồng ý
         </Button>,
       ]}
       className="modal-detail-user">
@@ -61,9 +61,16 @@ function ModalDetailUser({ setIsModalDetail, isModalDetail, asset, type }) {
           <InfoItem>
             Họ và tên: {data.lastName} {data.firstName}
           </InfoItem>
-          <InfoItem>Email: {data.email}</InfoItem>
-          <InfoItem>Số điện thoại: {data.phoneNumber}</InfoItem>
-          <InfoItem>Giới tính: {data.sex}</InfoItem>
+          <InfoItem>
+            Email: {data.email ? data.email : 'Chưa cập nhật'}
+          </InfoItem>
+          <InfoItem>
+            Số điện thoại:{' '}
+            {data.phoneNumber ? data.phoneNumber : 'Chưa cập nhật'}
+          </InfoItem>
+          <InfoItem>
+            Giới tính: {data.sex ? data.sex : 'Chưa cập nhật'}
+          </InfoItem>
           {type === 'user' && (
             <InfoItem>
               Loại tài khoản:{' '}
@@ -74,7 +81,9 @@ function ModalDetailUser({ setIsModalDetail, isModalDetail, asset, type }) {
           )}
         </InfoDetail>
         <DivImage>
-          <h2>Hình ảnh nhân viên</h2>
+          <h2>
+            {type === 'user' ? 'Hình ảnh nhân viên' : 'Hình ảnh khách hàng'}
+          </h2>
           <Image
             width={260}
             height={260}

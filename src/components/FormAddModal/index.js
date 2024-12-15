@@ -26,7 +26,11 @@ import {
   updateFilmForSeries,
 } from '../../redux/Action/Assets/filmForSeries';
 import { DivCheckUpdate } from './styles';
-import { API_SERIES_ADMIN } from '../../configs/apis';
+import {
+  API_POST_CHECK_NAME_MOVIES,
+  API_POST_CHECK_NAME_SERIES,
+  API_SERIES_ADMIN,
+} from '../../configs/apis';
 
 function FormAddModal(props) {
   const [seriesId, setSeriesId] = useState(false);
@@ -43,21 +47,88 @@ function FormAddModal(props) {
       placement,
     });
   };
-
   const onFinish = async (values) => {
+    let typeCheck = dataRecord ? 'update' : 'create';
+
+    if (type === 'movies') {
+      let data;
+      if (dataRecord) {
+        data = {
+          filmId: dataRecord._id,
+          type: typeCheck,
+          title: values.title,
+        };
+      } else {
+        data = {
+          title: values.title,
+          type: typeCheck,
+        };
+      }
+      const response = await fetch(API_POST_CHECK_NAME_MOVIES, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('tokenManager'),
+        },
+      });
+
+      const json = await response.json();
+      if (!json.success) {
+        messageApi.open({
+          type: 'error',
+          content: json.message,
+          duration: 2,
+        });
+        return;
+      }
+    }
+
+    if (type === 'series') {
+      let data;
+      if (dataRecord) {
+        data = {
+          seriesId: dataRecord._id,
+          type: typeCheck,
+          title: values.title,
+        };
+      } else {
+        data = {
+          title: values.title,
+          type: typeCheck,
+        };
+      }
+      const response = await fetch(API_POST_CHECK_NAME_SERIES, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('tokenManager'),
+        },
+      });
+
+      const json = await response.json();
+      if (!json.success) {
+        messageApi.open({
+          type: 'error',
+          content: json.message,
+          duration: 2,
+        });
+        return;
+      }
+    }
     if (type === 'film-for-series') {
-      let type = dataRecord ? 'update' : 'create';
       let data;
       if (dataRecord) {
         data = {
           number: values.filmSerialNumber,
-          type: type,
+          type: typeCheck,
           numberUpdate: dataRecord.filmSerialNumber,
         };
       } else {
         data = {
           number: values.filmSerialNumber,
-          type: type,
+          type: typeCheck,
         };
       }
 
@@ -554,22 +625,26 @@ function FormAddModal(props) {
                 }
               />
 
-              <ItemForm
+              <Form.Item
                 label={'Gói phim không được phép truy cập (không được xem)'}
                 name="listPackageIdBand"
-                message={`Vui lòng chọn gói phim!`}
-                input={
-                  <Select
-                    mode="multiple"
-                    allowClear
-                    style={{
-                      width: '100%',
-                    }}
-                    placeholder="Please select"
-                    options={props.options2}
-                  />
-                }
-              />
+                required={false}
+                rules={[
+                  {
+                    required: false,
+                    message: `Vui lòng chọn gói phim!`,
+                  },
+                ]}>
+                <Select
+                  mode="multiple"
+                  allowClear
+                  style={{
+                    width: '100%',
+                  }}
+                  placeholder="Vui lòng chọn"
+                  options={props.options2}
+                />
+              </Form.Item>
             </>
           )}
 
@@ -579,7 +654,7 @@ function FormAddModal(props) {
             }}
             className="add-film-button">
             <Button htmlType="submit">
-              {dataRecord !== undefined ? 'Thêm mới' : 'Cập nhật'}
+              {dataRecord === undefined ? 'Thêm mới' : 'Cập nhật'}
             </Button>
           </Form.Item>
         </Form>

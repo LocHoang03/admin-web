@@ -63,7 +63,11 @@ function LookInfo(props) {
             }
           />
         )}
-        <BtnLook onClick={() => props.onChangeLook()}>Search</BtnLook>
+        <BtnLook
+          onClick={() => props.onChangeLook()}
+          className={props.type === 'payment' ? 'btn-180' : ''}>
+          Tìm kiếm
+        </BtnLook>
       </DivLook>
     ) : (
       <>
@@ -106,7 +110,17 @@ function LookInfo(props) {
               { label: 'Nữ', value: 'Nữ' },
             ]}
           />
-          <BtnLook onClick={() => props.onChangeLook()}>Search</BtnLook>
+          <BtnLook
+            onClick={() => props.onChangeLook()}
+            className={
+              props.type === 'user' ||
+              props.type === 'subscriber' ||
+              props.type === 'banned-subscriber'
+                ? 'btn-180'
+                : ''
+            }>
+            Tìm kiếm
+          </BtnLook>
         </DivLook>
       </>
     ))
